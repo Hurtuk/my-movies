@@ -1,0 +1,15 @@
+%oscarWonIcon {
+	background: transparent url(/assets/images/oscar.png) center center no-repeat;
+	background-size: contain;
+	vertical-align: bottom;
+	display: inline-block;
+	height: 60px;
+	width: 22px;
+}
+
+%oscarNomineeIcon {
+	@extend %oscarWonIcon;
+	height: 40px;
+	width: 18px;
+	filter: brightness(0%);
+}

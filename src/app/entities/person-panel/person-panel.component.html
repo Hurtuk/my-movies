@@ -1,0 +1,8 @@
+<app-person-description	[person]="person"></app-person-description>
+<div class="years">
+	<span>{{person.born}} - {{person.died ? person.died : ''}}</span>
+	<span>{{getAge()}}</span>
+</div>
+<div class="countries">
+	<app-flag [country]="person.country"></app-flag>
+</div>

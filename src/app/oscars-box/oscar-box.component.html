@@ -1,0 +1,14 @@
+<ng-container *ngIf="oscars">
+	<div class="oscars" *ngIf="oscars.length">
+		<span class="won" *ngFor="let o of getOscarsWon()"></span>
+		<span class="nominee" *ngFor="let o of getOscarsNominations()"></span>
+		<div class="oscar-details">
+			<div class="oscar-detail" *ngFor="let o of oscars" [class.detail-won]="o.won">
+				<span>{{o.name}}</span>
+				<div>
+					<span *ngFor="let n of o.nominees">{{n.firstname + ' ' + n.lastname}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-container>

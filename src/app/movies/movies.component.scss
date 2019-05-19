@@ -1,0 +1,88 @@
+@import '../../shared/colors';
+@import '../../styles.scss';
+
+app-search-movie {
+	position: relative;
+	z-index: 10;
+	display: block;
+}
+
+.people {
+	margin-top: 10px;
+
+	span {
+		@include orange-border-left;
+		display: block;
+		font-size: 1.1em;
+    	margin: 0 0 10px 10px;
+	}
+
+	> div {
+		background-color: $background-gray-color;
+		padding: 20px 10px 10px;
+	}
+
+	&.directors {
+		float: left;
+		margin-right: 20px;
+	}
+	&.actors {
+		float: right;
+		margin-left: 20px;
+	}
+
+	app-person-panel {
+		display: block;
+		width: 200px;
+	}
+}
+
+.results {
+	max-width: 80%;
+	margin: 0 auto;
+}
+
+.results-recap {
+	text-align: center;
+	background-color: $orange-color;
+	color: white;
+	margin: 0 0 20px 0;
+	padding: 5px;
+
+	span {
+		display: inline-block;
+		margin: 0 30px;
+		font-weight: 100;
+
+		&::before {
+			font-family: 'Font Awesome 5 Free';
+			font-size: 1em;
+			font-weight: bold;
+			margin-right: 10px;
+		}
+
+		&.movies {
+			&::before { content: '\f008'; }
+		}
+
+		&.length {
+			&::before { content: '\f017'; }
+		}
+
+		&.mark {
+			&::before { content: '\f005'; }
+		}
+	}
+}
+
+.results {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+
+	> * {
+		width: 110px;
+		height: 163px;
+		margin: 20px;
+	}
+}

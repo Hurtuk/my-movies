@@ -1,0 +1,40 @@
+@import '../../../shared/colors';
+
+:host {
+	display: inline-block;
+}
+
+a {
+	display: block;
+}
+
+.uncredited {
+	opacity: .5;
+}
+
+app-person-simple {
+	display: block;
+	margin: auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+
+.person-details {
+	font-size: .9em;
+	margin-top: 20px;
+	letter-spacing: -.5px;
+	text-align: left;
+
+	span {
+		display: block;
+		color: $text-semilight-color;
+		line-height: 1.3em;
+	}
+
+	.role {
+		text-transform: uppercase;
+		color: $text-light-color;
+		font-size: .75em;
+	}
+}

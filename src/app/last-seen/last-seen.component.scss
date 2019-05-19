@@ -1,0 +1,196 @@
+@import '../../shared/colors';
+@import '../../styles.scss';
+
+:host {
+	display: flex;
+	min-height: calc(100vh - 50px);
+	flex-direction: column;
+	position: relative;
+
+	&::after {
+		content: '';
+		background-color: $background-gray-color;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 150px;
+		z-index: -1;
+	}
+}
+
+.current-movie {
+	flex: 1;
+
+	> * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.main-data {
+		@include gray-pattern;
+
+		+ .others {
+			.other-actors-label {
+				margin-top: 53px;
+			}
+		}
+	}
+
+	app-poster-simple {
+		width: 182px;
+		height: 268px;
+		margin: 20px 30px 20px 0;
+		float: left;
+	}
+
+	.metadata {
+		float: right;
+	}
+
+	.data {
+		min-height: 227px;
+		padding-top: 75px;
+		color: $text-semilight-color;
+	}
+
+	.metadata {
+		padding-top: 30px;
+	}
+
+	.title {
+		display: block;
+		font-size: 1.8em;
+		font-weight: bold;
+		line-height: 1em;
+	}
+
+	.sub-title {
+		letter-spacing: 1px;
+		color: $text-light-color;
+	}
+
+	.year {
+		font-weight: bold;
+		color: $text-light-color;
+		font-size: .9em;
+		margin-left: 10px;
+	}
+
+	.categories {
+		display: block;
+		margin-top: 20px;
+
+		a {
+			border: 2px solid $orange-color;
+			text-transform: uppercase;
+			font-size: .6em;
+			font-weight: bold;
+			padding: 10px 25px;
+			transition: background-color .2s;
+			letter-spacing: 1px;
+
+			&:hover {
+				background-color: rgba(255, 255, 255, .75);
+			}
+
+			+ a {
+				margin-left: 10px;
+			}
+		}
+	}
+
+	.directors {
+		display: block;
+
+		a {
+			+ a {
+				&::before {
+					content: ', ';
+				}
+
+				&:last-child {
+					&::before {
+						content: ' & ';
+					}
+				}
+			}
+		}
+	}
+
+	.actors-label {
+		@include orange-border-bottom;
+	}
+
+	.other-actors-label {
+		@include orange-border-left;
+		display: block;
+		font-size: 1.2em;
+		margin: 20px 0;
+	}
+
+	app-person-detailed {
+		cursor: pointer;
+		vertical-align: top;
+	}
+
+	.actors {
+		margin-top: 20px;
+
+		app-person-detailed {
+			&:not(:first-child) {
+				margin-left: 35px;
+			}
+		}
+	}
+
+	.other-actors {
+		app-person-detailed {
+			margin-right: 35px;
+		}
+	}
+
+	.oscars {
+		background-color: $oscar-color;
+		color: $oscar-text-color;
+		z-index: 0;
+		padding: 3px;
+
+		span {
+			+ span {
+				&::before {
+					content: ' et ';
+				}
+			}
+		}
+	}
+}
+
+.latest-movies {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 40px;
+	margin-bottom: 15px;
+
+	.movie {
+		app-poster-detailed {
+			width: 136px;
+			height: 201px;
+			cursor: pointer;
+			display: block;
+			transition: transform .5s;
+
+			&.selected {
+				transform: scale(.5);
+				cursor: default;
+
+				&:hover {
+					/deep/ .poster {
+						transform: none;
+					}
+				}
+			}
+		}
+	}
+}

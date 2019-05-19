@@ -1,0 +1,67 @@
+<header>
+	<h1>Sagas</h1>
+</header>
+<div class="content">
+	<ng-container *ngIf="sagas | async as sagas">
+		<section class="saga" *ngFor="let saga of sagas">
+			<div class="saga-main">
+				<div>
+					<div class="count">{{ saga.count }} films</div>
+					<div class="length">
+						<span>{{ lengthToString(saga.length) }}</span>
+						<span>{{ lengthToString(saga.length / saga.count) }}</span>
+					</div>
+					<div class="mark">{{ saga.mark.toFixed(2) }}</div>
+				</div>
+				<app-poster-simple (click)="displayDetails(saga.id)" [icons]="false" [movie]="saga.movies[saga.count - 1]"></app-poster-simple>
+				<div>
+					<h3>{{ saga.title }}</h3>
+					<div class="people">
+						<div class="directors">Réalisés par <a *ngFor="let dir of saga.directors" [routerLink]="['/movies', { dirs: dir.id }]" [class.justseen]="dir.justseen">{{dir.firstname + ' ' + dir.lastname + (dir.moviesCount != saga.count && dir.moviesCount > 1 ? ' (' + dir.moviesCount + ')' : '')}}</a></div>
+						<div class="actors" *ngIf="saga.actors.length">
+							<span>Avec</span>
+							<div *ngFor="let person of saga.actors" [class.hovered]="selectedSaga === saga.id && hoveredMovie && playedIn(person.id)">
+								<app-person-detailed
+									[class.justseen]="person.justseen"
+									[width]="80"
+									[height]="100"
+									[style.font-size.em]="0.8"
+									[person]="person"></app-person-detailed>
+								<circle-progress
+									*ngIf="person.moviesCount != saga.count"
+									[percent]="person.moviesCount * 100 / saga.count"
+									[style.width.px]="20"
+								></circle-progress>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="saga-detail" *ngIf="sagaDetails && selectedSaga === saga.id">
+				<div class="movie" *ngFor="let m of sagaDetails" (mouseenter)="hoveredMovie = m" (mouseleave)="hoveredMovie = null">
+					<app-poster-simple [movie]="m" [smallicons]="true"></app-poster-simple>
+					<span>{{m.year}}</span>
+				</div>
+			</div>
+		</section>
+	</ng-container>
+	<div>
+		<div *ngFor="let group of actors">
+			<div class="count">{{ group[0].movies.length }} films</div>
+			<div class="people">
+				<div class="person"	*ngFor="let person of group">
+					<app-person-detailed
+						[class.justseen]="person.person.justseen"
+						[width]="90 + 12 * (group[0].movies.length - 4)"
+						[height]="110 + 15 * (group[0].movies.length - 4)"
+						[style.font-size.em]="0.8 + 0.07 * (group[0].movies.length - 4)"
+						[person]="person.person"></app-person-detailed>
+					<ul [style.padding-right.px]="40 + 90 + 12 * (group[0].movies.length - 4)"
+						[style.min-height.px]="50 + 110 + 15 * (group[0].movies.length - 4)">
+						<li *ngFor="let movie of person.movies">{{movie}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

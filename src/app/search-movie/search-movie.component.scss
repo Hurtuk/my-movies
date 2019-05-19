@@ -1,0 +1,65 @@
+@import '../../shared/colors';
+@import '../../styles.scss';
+
+:host {
+	@include gray-pattern;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+label {
+	font-size: .9em;
+	color: $text-semilight-color;
+	font-family: 'Brandon Grotesque';
+	font-weight: 100;
+
+	~ label {
+		margin-left: 20px;
+	}
+}
+
+input {
+	&[type=text] {
+		max-width: 70px;
+	}
+
+	&[type=checkbox] {
+		display: none;
+
+		+ label {
+			filter: grayscale(1);
+			opacity: .3;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background-size: contain;
+			background-repeat: no-repeat;
+			cursor: pointer;
+			vertical-align: middle;
+		}
+
+		&:checked {
+			+ label {
+				filter: none;
+				opacity: 1;
+			}
+		}
+
+		&#owned {
+			+ label {
+				background-image: url(/assets/images/owned.png);
+			}
+		}
+
+		&#cinema {
+			+ label {
+				background-image: url(/assets/images/cinema.png);
+			}
+		}
+	}
+}
+
+select {
+	max-width: 50px;
+}

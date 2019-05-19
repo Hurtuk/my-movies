@@ -1,0 +1,61 @@
+@import '../../shared/colors';
+@import '../../styles.scss';
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	position: relative;
+	display: inline-block;
+	margin: 0 30px;
+
+	&:hover {
+		ul {
+			display: block;
+		}
+	}
+}
+
+a {
+	@include orange-border-bottom;
+	display: block;
+	color: $text-color;
+	text-decoration: none;
+
+	&:not([routerLink]) {
+		position: relative;
+
+		&::after {
+			content: '';
+			border-top: 10px solid $text-semilight-color;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			position: absolute;
+			right: calc(50% - 5px);
+			top: 100%;
+		}
+	}
+
+	+ ul {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		background-color: white;
+		padding: 0;
+		margin: 0;
+
+		li {
+			padding: 0;
+			margin: 0;
+			width: 100%;
+
+			a {
+				padding: 5px 10px;
+			}
+		}
+	}
+}

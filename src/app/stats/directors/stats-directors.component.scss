@@ -1,0 +1,10 @@
+@import '../../../shared/colors';
+@import '../../../styles.scss';
+
+header {
+	background-image: url(/assets/images/oscars.jpg);
+	background-size: contain;
+	background-color: black;
+	color: white;
+	height: 110px;
+}

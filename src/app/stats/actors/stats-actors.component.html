@@ -1,0 +1,21 @@
+<header>
+	<h1>Acteurs</h1>
+</header>
+<div class="row">
+	<h2>Les plus vus</h2>
+	<app-people-list
+		type="acts"
+		[data]="mostSeenActors | async"></app-people-list>
+</div>
+<div class="row">
+	<h2>Les mieux notés</h2>
+	<app-people-list
+		type="acts"
+		[data]="bestActors | async"></app-people-list>
+</div>
+<div class="row gray">
+	<h2>Les premiers rôles</h2>
+	<app-people-list
+		type="acts"
+		[data]="firstRoles | async"></app-people-list>
+</div>

@@ -1,0 +1,11 @@
+<div class="selected" *ngFor="let item of selectedItems">
+	<span>{{ displayFunction(item) }}</span>
+	<i class="remove" (click)="remove(item)">-</i>
+</div>
+<i class="add" (click)="optionsOpened = !optionsOpened">+</i>
+<ul [class.columns]="items.length < 30" [class.open]="optionsOpened">
+	<ng-container *ngFor="let item of items">
+		<li *ngIf="selectedItems.indexOf(item) === -1"
+			(click)="add(item)">{{ displayFunction(item) }}</li>
+	</ng-container>
+</ul>

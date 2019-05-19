@@ -1,0 +1,22 @@
+@import '../styles';
+
+:host {
+	display: flex;
+	flex-direction: column;
+}
+
+app-head {
+	box-shadow: 0 -2px 30px -4px rgba(0, 0, 0, 0.4);
+	height: 50px;
+	position: relative;
+	z-index: 2;
+}
+
+div {
+	flex: 1;
+	position: relative;
+	height: calc(100% - 50px);
+	overflow-y: auto;
+	overflow-x: hidden;
+	z-index: 1;
+}

@@ -1,0 +1,153 @@
+@import './shared/colors';
+
+@font-face {
+	font-family: 'Brandon Grotesque';
+	font-style: normal;
+	font-weight: 500;
+	src: local('Brandon Grotesque Medium'), url('/assets/fonts/brandon/brandon-grotesque-medium-587bd623e472a.woff') format('woff');
+}
+@font-face {
+	font-family: 'Brandon Grotesque';
+	font-style: normal;
+	font-weight: 100;
+	src: local('Brandon Grotesque Thin'), url('/assets/fonts/brandon/brandon-grotesque-thin-587bd5b76cfba.woff') format('woff');
+}
+@font-face {
+	font-family: 'Brandon Grotesque';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Brandon Grotesque Bold'), url('/assets/fonts/brandon/brandon-grotesque-bold-587bd6400afd0.woff') format('woff');
+}
+
+@mixin shadowed {
+	box-shadow: 0 10px 45px -4px rgba(0,0,0,.4);
+}
+
+@mixin orange-border-bottom {
+	border-bottom-width: 5px;
+	border-color: transparent;
+	border-bottom-style: solid;
+
+	&:hover,
+	&.selected {
+		border-color: $orange-color;
+	}
+}
+
+@mixin orange-border-left {
+	border-left-width: 5px;
+	border-left-style: solid;
+	padding-left: .9em;
+	border-color: $orange-color;
+	text-align: left;
+}
+
+@mixin orange-border-right {
+	border-right-width: 5px;
+	border-right-style: solid;
+	padding-right: .9em;
+	text-align: right;
+	border-color: $orange-color;
+}
+
+@mixin gray-pattern {
+	background-color: $background-gray-color;
+
+	&::before {
+		content: '';
+		background-image: url(/assets/images/home_background.jpg);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+		opacity: .2;
+	}
+}
+
+/* You can add global styles to this file, and also import other style files */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	font-family: 'Brandon Grotesque', serif;
+	font-weight: 400;
+	color: $text-color;
+	font-size: 1.2em;
+}
+
+app-root {
+	display: block;
+	height: 100%;
+}
+
+header {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	overflow: auto;
+
+	h1 {
+		margin-left: 50px;
+		text-transform: uppercase;
+	}
+}
+
+.row {
+	width: 100%;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+	color: $text-color;
+}
+
+input {
+	outline: 0;
+	font-size: 16px;
+	background-color: transparent;
+	padding: 3px 0;
+	font-family: 'Brandon Grotesque';
+
+	&[type=text] {
+		border: 0;
+		border-bottom: 2px solid $text-light-color;
+		color: $text-color;
+
+		&:focus {
+			border-color: $orange-color;
+		}
+	}
+}
+
+select {
+	font-family: 'Brandon Grotesque';
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+	outline: 0;
+}
+
+.justseen {
+	outline: 5px ridge $oscar-text-color;
+	position: relative;
+	background-color: lightyellow;
+
+	&::after {
+		content: '+1';
+		width: 30px;
+		position: absolute;
+		top: calc(100% + 5px);
+		color: white;
+		background-color: $oscar-text-color;
+		font-weight: bold;
+		left: calc(50% - 15px);
+		text-align: center;
+	}
+}

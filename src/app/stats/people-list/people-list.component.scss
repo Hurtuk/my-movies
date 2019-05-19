@@ -1,0 +1,24 @@
+@import '../../../shared/colors';
+
+:host {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.person {
+	display: inline-block;
+	margin: 5px 2px;
+	position: relative;
+}
+
+span {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: white;
+	background-color: $text-color;
+	text-align: center;
+}

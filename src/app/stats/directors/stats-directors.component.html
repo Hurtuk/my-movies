@@ -1,0 +1,15 @@
+<header>
+	<h1>Réalisateurs</h1>
+</header>
+<div class="row">
+	<h2>Les plus vus</h2>
+	<app-people-list
+		type="dirs"
+		[data]="mostSeenDirectors | async"></app-people-list>
+</div>
+<div class="row">
+	<h2>Les mieux notés</h2>
+	<app-people-list
+		type="dirs"
+		[data]="bestDirectors | async"></app-people-list>
+</div>

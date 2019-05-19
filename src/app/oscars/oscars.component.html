@@ -1,0 +1,54 @@
+<header [class.large]="!currentType">
+	<h1>Oscars</h1>
+	<div>
+		<input type="radio" name="type"
+			[id]="'type-' + BY_YEAR"
+			[value]="BY_YEAR"
+			[checked]="currentType === BY_YEAR"
+			(change)="changeType(BY_YEAR)" />
+		<label [for]="'type-' + BY_YEAR">Par année</label>
+		<input type="radio" name="type"
+			[id]="'type-' + BY_TYPE"
+			[value]="BY_TYPE"
+			[checked]="currentType === BY_TYPE"
+			(change)="changeType(BY_TYPE)" />
+		<label [for]="'type-' + BY_TYPE">Par type</label>
+	</div>
+</header>
+<ng-container *ngIf="currentType">
+	<select *ngIf="options" [(ngModel)]="currentOption" (change)="updateOscars()">
+		<option *ngIf="currentType === BY_TYPE"></option>
+		<option *ngFor="let o of options">{{o}}</option>
+	</select>
+	<div class="row results" *ngIf="items">
+		<fieldset *ngFor="let r of items">
+			<legend>{{r.key}}</legend>
+			<div class="winners-posters">
+				<ng-container *ngIf="!showPerson(r)">
+					<app-poster-simple [icons]="false" *ngFor="let w of r.winners" [movie]="w.movie"></app-poster-simple>
+				</ng-container>
+				<ng-container *ngIf="showPerson(r)">
+					<ng-container *ngFor="let w of r.winners">
+						<app-person-simple *ngFor="let p of w.nominees" [personId]="p.id"></app-person-simple>
+					</ng-container>
+				</ng-container>
+			</div>
+			<ul>
+				<ng-container *ngIf="r.winners.length">
+					<li *ngFor="let winner of r.winners" class="winner">
+						<span class="movie-title">{{winner.movie.titleFr}}</span>
+						<span class="movie-nominee">{{displayPeople(winner.nominees)}}</span>
+					</li>
+				</ng-container>
+				<ng-container *ngIf="!r.winners.length">
+					<li class="winner unknown">???</li>
+				</ng-container>
+				<li *ngFor="let nominee of r.nominees" class="nominee">
+					<span class="movie-title">{{nominee.movie.titleFr}}</span>
+					<span class="movie-nominee">{{displayPeople(nominee.nominees)}}</span>
+				</li>
+				<li *ngFor="let unknown of getUnknowns(r)" class="unknown">???</li>
+			</ul>
+		</fieldset>
+	</div>
+</ng-container>

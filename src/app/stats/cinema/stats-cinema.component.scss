@@ -1,0 +1,98 @@
+@import '../../../shared/colors';
+@import '../../../styles.scss';
+
+header {
+	background-image: url(/assets/images/cinema.jpg);
+	color: white;
+}
+
+.year {
+	@include orange-border-left;
+	margin: 20px 0;
+	font-weight: 400;
+	font-size: .8em;
+}
+
+.count {
+	@include orange-border-right;
+	margin: 20px 0 10px;
+	font-weight: 400;
+	font-size: .8em;
+}
+
+.content {
+	display: flex;
+
+	> div {
+		flex: 1;
+		margin: 0 30px;
+
+		&:first-child {
+			border-right: 1px solid rgba(136, 3, 1, .05);
+		}
+
+		+ div {
+			text-align: right;
+		}
+	}
+}
+
+app-poster-simple {
+	height: 70px;
+	width: 50px;
+	transform-origin: 50% 50%;
+	transition: transform .3s;
+
+	&:hover {
+		transform: scale(2);
+		z-index: 100;
+	}
+}
+
+.person {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+
+	app-person-detailed {
+		font-size: .8em;
+		white-space: nowrap;
+		display: inline-block;
+		vertical-align: top;
+		margin: 0 0 20px 20px;
+		padding: 10px;
+		position: relative;
+
+		&.justseen {
+			padding-bottom: 5px;
+		}
+
+		&:hover {
+			z-index: 4;
+
+			+ ul {
+				display: block;
+			}
+		}
+	}
+
+	ul {
+		@include shadowed;
+		display: none;
+		list-style-type: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+		white-space: nowrap;
+		margin: 0;
+		background-color: white;
+		z-index: 3;
+		border-radius: 5px;
+		color: $text-semilight-color;
+		font-size: .9em;
+		line-height: 1.2em;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 20px;
+	}
+}

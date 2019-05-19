@@ -1,0 +1,51 @@
+<ng-container *ngIf="latestMovies | async as movies">
+	<div class="current-movie">
+		<div class="main-data">
+			<div class="row">
+				<app-poster-simple [movie]="movies[selected]"></app-poster-simple>
+				<div class="metadata">
+					<span class="actors-label selected">Avec</span>
+					<div class="actors">
+						<app-person-detailed *ngFor="let act of movies[selected].actors" class="first-role" [person]="act"></app-person-detailed>
+					</div>
+				</div>
+				<div class="data">
+					<div>
+						<span class="length">{{lengthToString(movies[selected].length)}}</span>
+						<span class="year">{{movies[selected].year}}</span>
+					</div>
+					<span class="title">{{movies[selected].titleFr}}</span>
+					<span class="sub-title">{{movies[selected].titleFr !== movies[selected].title ? movies[selected].title : '&nbsp;'}}</span>
+					<span class="directors">De 
+						<a [routerLink]="['/movies', { dirs: dir.id }]" *ngFor="let dir of movies[selected].directors">{{dir.firstname + ' ' + dir.lastname}}</a>
+					</span>
+					<span class="categories"><a [routerLink]="['movies', {cats: category.id}]" *ngFor="let category of movies[selected].categories">{{category.name}}</a></span>
+				</div>
+			</div>
+		</div>
+		<ng-container *ngIf="movies[selected].oscars | async as oscars">
+			<div class="oscars" *ngIf="getOscarsWon(oscars).length + getOscarsNominations(oscars).length > 0">
+				<span *ngIf="oscarWon">{{ oscarWon }} Oscar</span>
+				<span *ngIf="oscarNominee">{{ oscarNominee }} nomination{{ oscarNominee > 1 ? 's' : '' }}</span>
+			</div>
+		</ng-container>
+		<ng-container *ngIf="movies[selected].otherActors | async as others">
+			<ng-container *ngIf="others.length">
+				<div class="row others">
+					<span class="other-actors-label">Avec aussi</span>
+				</div>
+				<div class="row other-actors">
+					<app-person-detailed [width]="120" [height]="150" *ngFor="let act of others" [person]="act"></app-person-detailed>
+				</div>
+			</ng-container>
+		</ng-container>
+	</div>
+	<div class="latest-movies row">
+		<div class="movie" *ngFor="let movie of movies; let i = index">
+			<app-poster-detailed
+				[movie]="movie"
+				[class.selected]="i === selected"
+				(click)="selected = i"></app-poster-detailed>
+		</div>
+	</div>
+</ng-container>

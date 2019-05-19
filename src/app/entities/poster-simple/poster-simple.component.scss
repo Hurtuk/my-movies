@@ -1,0 +1,68 @@
+@import '../../../shared/marks';
+@import '../../../styles';
+
+:host {
+	display: inline-block;
+	position: relative;
+}
+
+.poster {
+	@include shadowed;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	position: relative;
+	z-index: 2;
+
+	&:hover {
+		~ .metadata {
+			right: -32px;
+			opacity: 1;
+		}
+
+		~ .mark {
+			opacity: 1;
+			top: calc(100% - 5px);
+		}
+	}
+}
+
+.metadata {
+	overflow: auto;
+
+	i {
+		display: block;
+		width: 25px;
+		height: 25px;
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
+		float: left;
+		opacity: .1;
+		filter: grayscale(1) invert(1);
+
+		&.owned {
+			background-image: url(/assets/images/owned.png);
+		}
+
+		&.cinema {
+			background-image: url(/assets/images/cinema.png);
+		}
+
+		&.true {
+			filter: none;
+			opacity: 1;
+		}
+	}
+
+	&.small-icons i {
+		width: 12px;
+		height: 12px;
+	}
+
+	div {
+		float: right;
+	}
+}

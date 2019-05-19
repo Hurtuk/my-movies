@@ -1,0 +1,7 @@
+<a [routerLink]="['/movies', {acts: person.id}]" class="person" [class.uncredited]="person.role && isUncredited" [style.min-width.px]="width">
+	<app-person-simple [personId]="person.id" [style.height.px]="height" [style.width.px]="width"></app-person-simple>
+	<div class="person-details">
+		<span class="role" *ngIf="person.role">{{person.role}}</span>
+		<span class="name">{{person.firstname}} {{person.lastname}}</span>
+	</div>
+</a>

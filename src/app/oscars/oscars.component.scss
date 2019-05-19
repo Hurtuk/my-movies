@@ -1,0 +1,128 @@
+@import '../../shared/colors';
+@import '../../styles.scss';
+
+header {
+	background-image: url(/assets/images/oscars.jpg);
+	background-size: contain;
+	background-color: black;
+	color: white;
+	height: 110px;
+	transition: height .5s;
+	overflow: hidden;
+
+	&.large {
+		height: calc(100vh - 50px);
+
+		div {
+			top: 0;
+			left: 0;
+		}
+	}
+
+	div {
+		position: relative;
+		margin-left: 100px;
+		top: -70px;
+		left: 170px;
+		transition: top .5s, left .5s;
+	}
+
+	input {
+		display: none;
+
+		&:checked {
+			+ label {
+				@extend .selected;
+			}
+		}
+	}
+
+	label {
+		@include orange-border-bottom;
+		cursor: pointer;
+		margin: 0 30px;
+	}
+}
+
+select {
+	@include orange-border-bottom;
+	@extend .selected;
+	display: block;
+	margin: 20px auto;
+}
+
+.results {
+	fieldset {
+		@include shadowed;
+		display: inline-block;
+		vertical-align: top;
+		width: calc(50% - 40px);
+		margin: 20px;
+		border: 0;
+		padding: 0;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	legend {
+		background-color: $orange-color;
+		font-weight: 100;
+		color: white;
+		width: calc(100% - 20px);
+		padding: 2px 10px;
+	}
+
+	.winners-posters {
+		display: inline-block;
+		vertical-align: top;
+
+		> * {
+			height: 150px;
+			width: 102px;
+		}
+	}
+
+	ul {
+		display: inline-block;
+		vertical-align: top;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	li {
+		padding: 10px;
+
+		span {
+			display: block;
+			line-height: 1.1em;
+
+			+ span {
+				font-style: italic;
+				font-weight: 100;
+				padding-left: 20px;
+			}
+		}
+	}
+
+	.winner {
+		background-color: $oscar-color;
+	}
+
+	.unknown {
+		color: $text-light-color;
+		font-style: italic;
+		font-weight: 100;
+		background-color: transparent;
+		min-height: 38px;
+	}
+
+	.nominee,
+	.unknown {
+		font-size: .9em;
+		border-top: 1px solid lighten($text-light-color, 20%);
+		opacity: .7;
+		padding-left: 30px;
+	}
+}

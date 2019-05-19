@@ -1,0 +1,165 @@
+@import '../../../shared/colors';
+@import '../../../styles.scss';
+
+header {
+	background-image: url(/assets/images/cinema.jpg);
+	color: white;
+}
+
+.content {
+	> div {
+		margin: 0 30px;
+	}
+}
+
+.saga {
+	padding: 10px 0 20px;
+
+	&:nth-child(even) {
+		background-color: rgba(0, 0, 0, .03);
+	}
+}
+
+.saga-main {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	margin-top: 20px;
+
+	> div {
+		&:first-child {
+			width: 190px;
+			margin-left: 30px;
+			color: $text-semilight-color;
+			text-align: right;
+		}
+	}
+}
+
+.count,
+.length span,
+.mark {
+	&::before {
+		font-family: 'Font Awesome 5 Free';
+		font-size: 1em;
+		font-weight: bold;
+		margin-right: 8px;
+		margin-left: 10px;
+		color: $text-light-color;
+	}
+}
+
+.count {
+	&::before {
+		content: '\f008';
+	}
+}
+
+.length {
+	span {
+		&::before {
+			content: '\f017';
+		}
+
+		+ span {
+			&::before {
+
+			}
+		}
+	}
+}
+
+.mark {
+	&::before {
+		content: '\f005';
+	}
+}
+
+h3 {
+	margin: -10px 0 10px 0;
+	font-size: 1.8em;
+}
+
+app-poster-simple {
+	height: 200px;
+	width: 135px;
+	margin: 0 10px;
+	cursor: pointer;
+
+	+ div {
+		flex: 1;
+	}
+}
+
+.directors {
+	@include orange-border-left;
+	font-size: .8em;
+
+	a {
+		+ a {
+			&::before {
+				content: ', ';
+			}
+		}
+	}
+}
+
+.actors {
+	margin-top: 10px;
+
+	span {
+		@include orange-border-left;
+		display: block;
+		font-size: .8em;
+		margin-bottom: 10px;
+	}
+
+	div {
+		display: inline-block;
+		margin: 0 10px 10px;
+		vertical-align: top;
+		position: relative;
+
+		&.hovered {
+			background-color: $orange-color;
+			position: relative;
+			margin: -5px 5px 5px;
+			padding: 5px;
+		
+			circle-progress {
+				top: 85px;
+			}
+		}
+
+		circle-progress {
+			display: block;
+			position: absolute;
+			top: 80px;
+			left: calc(50% - 21px);
+		}
+	}
+}
+
+.saga-detail {
+	margin-top: 20px;
+	padding-left: 190px;
+
+	.movie {
+		display: inline-block;
+	}
+	
+	app-poster-simple {
+		height: 120px;
+		width: 82px;
+		display: block;
+		cursor: auto;
+	}
+
+	span {
+		display: block;
+		text-align: center;
+		margin-top: 12px;
+		font-size: .7em;
+		color: $text-light-color;
+	}
+}

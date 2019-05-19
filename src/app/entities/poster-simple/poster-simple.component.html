@@ -1,0 +1,6 @@
+<div class="metadata" *ngIf="icons" [class.small-icons]="smallicons">
+	<i class="owned" [class.true]="movie.owned"></i>
+	<i class="cinema" [class.true]="movie.cinema"></i>
+	<div [class]="'mark mark-' + movie.mark * 10">{{movie.mark}}</div>
+</div>
+<div class="poster" [style.backgroundImage]="'url(' + posterUrl + ')'"></div>
