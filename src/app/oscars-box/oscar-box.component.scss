@@ -9,10 +9,12 @@
 
 	.won {
 		@extend %oscarWonIcon;
+		background-image: url(../../assets/images/oscar.png);
 	}
 
 	.nominee {
 		@extend %oscarNomineeIcon;
+		background-image: url(../../assets/images/oscar.png);
 	}
 
 	&:hover {

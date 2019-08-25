@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +9,7 @@ import { LastSeenComponent } from './last-seen/last-seen.component';
 import { PosterSimpleComponent } from './entities/poster-simple/poster-simple.component';
 import { UrlBuilderService } from '../services/url-builder.service';
 import { MovieService } from '../services/movie.service';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { VignetteService } from '../services/vignette.service';
 import { PosterDetailedComponent } from './entities/poster-detailed/poster-detailed.component';
 import { PersonDetailedComponent } from './entities/person-detailed/person-detailed.component';
@@ -63,7 +63,7 @@ import { StatsService } from '../services/stats.service';
   imports: [
     BrowserModule,
 	AppRoutingModule,
-	HttpModule,
+	HttpClientModule,
 	FormsModule,
 	NgCircleProgressModule.forRoot({
 		radius: 15,

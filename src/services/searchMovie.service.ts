@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { UrlBuilderService } from './url-builder.service';
@@ -18,29 +18,27 @@ export class SearchMovieService {
 	public results = new Subject<Movie[]>();
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private urlBuilder: UrlBuilderService,
 		private movieService: MovieService,
 		private searchPersonService: SearchPersonService
 	) {}
 
 	public getCinemaMovies(): Observable<{year: number, movies: Movie[]}[]> {
-		return this.http.get(this.urlBuilder.buildUrl('stats/getCinemaMovies'))
+		return this.http.get<{year: number, movies: Movie[]}[]>(this.urlBuilder.buildUrl('stats/getCinemaMovies'))
 						.pipe(
-							map(response =>
-									(response.json().data as {year: number, movies: Movie[]}[])
-										.map(m => ({
-											year: m.year,
-											movies: m.movies.map(x => this.movieService.jsonToMovie(x))
-										}))
+							map(response =>	response.map(m => ({
+									year: m.year,
+									movies: m.movies.map(x => this.movieService.jsonToMovie(x))
+								}))
 							)
 						);
 	}
 
 	public getSagas(): Observable<{id: number, title: string, mark: number, length: number, count: number, justseen: boolean, movies: Movie[], directors: Person[], actors: Person[]}[]> {
-		return this.http.get(this.urlBuilder.buildUrl('stats/getSagas'))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('stats/getSagas'))
 						.pipe(
-							map(response => (response.json().data as any[]).map(x => ({
+							map(response => response.map(x => ({
 								id: Number.parseInt(x.id),
 								title: x.title,
 								mark: Number.parseFloat(x.mark),
@@ -72,7 +70,7 @@ export class SearchMovieService {
 		if (directors) {
 			this.searchPersonService.getPeopleById(directors.map(p => p.id), 'dir').subscribe();
 		}
-		return this.http.get(this.urlBuilder.buildUrl(
+		return this.http.get<any[]>(this.urlBuilder.buildUrl(
 			'searchMovies',
 			titleFr,
 			title,
@@ -89,70 +87,40 @@ export class SearchMovieService {
 					.pipe(
 						map(response => {
 							this.results.next(
-								(response.json().data as any[])
-									.map(m => this.movieService.jsonToMovie(m)));
+								response.map(m => this.movieService.jsonToMovie(m)));
 							})
 					);
 	}
 
     public getActiveYears(): Observable<string[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getActiveYears'))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getActiveYears'))
 						.pipe(
-							map(response => (response.json().data as any[]).map(x => x.year))
+							map(response => response.map(x => x.year))
 						);
 	}
 
     public getCategories(): Observable<SimpleEntity[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getCategories'))
-						.pipe(
-							map(response => (response.json().data as any[])
-										.map(x => {
-											const item = new SimpleEntity();
-											item.id = x.id;
-											item.name = x.name;
-											return item;
-										}))
-						);
+		return this.http.get<SimpleEntity[]>(this.urlBuilder.buildUrl('getCategories'));
 	}
 
     public getCountries(): Observable<SimpleEntity[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getCountries'))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getCountries'))
 						.pipe(
-							map(response => (response.json().data as any[])
-										.map(x => {
-											const item = new SimpleEntity();
-											item.id = x.country;
-											item.name = x.country;
-											return item;
-										}))
+							map(response => response
+								.map(x => {
+									const item = new SimpleEntity();
+									item.id = x.country;
+									item.name = x.country;
+									return item;
+								}))
 						);
 	}
 
     public getDirectors(): Observable<Person[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getDirectors'))
-						.pipe(
-							map(response => (response.json().data as any[])
-										.map(x => {
-											const item = new Person();
-											item.id = x.id;
-											item.lastname = x.lastname;
-											item.firstname = x.firstname;
-											return item;
-										}))
-						);
+		return this.http.get<Person[]>(this.urlBuilder.buildUrl('getDirectors'));
 	}
 
 	public getActors(optionalActor: string): Observable<Person[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getMainActors', optionalActor))
-						.pipe(
-							map(response => (response.json().data as any[])
-										.map(x => {
-											const item = new Person();
-											item.id = x.id;
-											item.lastname = x.lastname;
-											item.firstname = x.firstname;
-											return item;
-										}))
-						);
+		return this.http.get<Person[]>(this.urlBuilder.buildUrl('getMainActors', optionalActor));
 	}
 }

@@ -6,6 +6,10 @@
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 20px;
+
+	&::before {
+		background-image: url(../../assets/images/home_background.jpg);
+	}
 }
 
 label {
@@ -48,13 +52,13 @@ input {
 
 		&#owned {
 			+ label {
-				background-image: url(/assets/images/owned.png);
+				background-image: url(../../assets/images/owned.png);
 			}
 		}
 
 		&#cinema {
 			+ label {
-				background-image: url(/assets/images/cinema.png);
+				background-image: url(../../assets/images/cinema.png);
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { UrlBuilderService } from './url-builder.service';
@@ -11,29 +11,23 @@ import { MovieService } from './movie.service';
 export class OscarService {
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private urlBuilder: UrlBuilderService,
 		private movieService: MovieService
 	) {}
 
 	public getYears(): Observable<string[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getOscarYears'))
-						.pipe(map(
-							response => response.json().data
-						));
+		return this.http.get<string[]>(this.urlBuilder.buildUrl('getOscarYears'));
 	}
 
 	public getTypes(): Observable<string[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getOscarTypes'))
-						.pipe(map(
-							response => response.json().data
-						));
+		return this.http.get<string[]>(this.urlBuilder.buildUrl('getOscarTypes'));
 	}
 
 	public getOscarsByType(type: string): Observable<any[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getOscarsByType', type))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getOscarsByType', type))
 						.pipe(map(
-							response => response.json().data.map(o => ({
+							response => response.map(o => ({
 								key: o.year,
 								candidates: o.candidates,
 								winners: o.winners.map(w =>
@@ -67,9 +61,9 @@ export class OscarService {
 	}
 
 	public getOscarsByYear(year: string): Observable<any[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getOscarsByYear', year))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getOscarsByYear', year))
 						.pipe(map(
-							response => response.json().data.map(o => ({
+							response => response.map(o => ({
 								key: o.name,
 								candidates: o.candidates,
 								winners: o.winners.map(w =>

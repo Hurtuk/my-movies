@@ -4,19 +4,19 @@
 	font-family: 'Brandon Grotesque';
 	font-style: normal;
 	font-weight: 500;
-	src: local('Brandon Grotesque Medium'), url('/assets/fonts/brandon/brandon-grotesque-medium-587bd623e472a.woff') format('woff');
+	src: local('Brandon Grotesque Medium'), url('assets/fonts/brandon/brandon-grotesque-medium-587bd623e472a.woff') format('woff');
 }
 @font-face {
 	font-family: 'Brandon Grotesque';
 	font-style: normal;
 	font-weight: 100;
-	src: local('Brandon Grotesque Thin'), url('/assets/fonts/brandon/brandon-grotesque-thin-587bd5b76cfba.woff') format('woff');
+	src: local('Brandon Grotesque Thin'), url('assets/fonts/brandon/brandon-grotesque-thin-587bd5b76cfba.woff') format('woff');
 }
 @font-face {
 	font-family: 'Brandon Grotesque';
 	font-style: normal;
 	font-weight: 700;
-	src: local('Brandon Grotesque Bold'), url('/assets/fonts/brandon/brandon-grotesque-bold-587bd6400afd0.woff') format('woff');
+	src: local('Brandon Grotesque Bold'), url('assets/fonts/brandon/brandon-grotesque-bold-587bd6400afd0.woff') format('woff');
 }
 
 @mixin shadowed {
@@ -50,12 +50,12 @@
 	border-color: $orange-color;
 }
 
+
 @mixin gray-pattern {
 	background-color: $background-gray-color;
 
 	&::before {
 		content: '';
-		background-image: url(/assets/images/home_background.jpg);
 		position: absolute;
 		top: 0;
 		left: 0;

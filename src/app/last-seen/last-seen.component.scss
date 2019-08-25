@@ -30,6 +30,10 @@
 	.main-data {
 		@include gray-pattern;
 
+		&::before {
+			background-image: url(../../assets/images/home_background.jpg);
+		}
+
 		+ .others {
 			.other-actors-label {
 				margin-top: 53px;
@@ -186,7 +190,7 @@
 				cursor: default;
 
 				&:hover {
-					/deep/ .poster {
+					&::ng-deep .poster {
 						transform: none;
 					}
 				}

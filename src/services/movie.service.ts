@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { UrlBuilderService } from './url-builder.service';
@@ -16,7 +16,7 @@ export class MovieService {
 	private LATEST_COUNT = 7;
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private urlBuilder: UrlBuilderService
 	) {}
 
@@ -40,45 +40,41 @@ export class MovieService {
 	}
 
     public getGlobalInfo(): Observable<{length: string, mark: number, count: number}> {
-		return this.http.get(this.urlBuilder.buildUrl('getGlobalInfo'))
+		return this.http.get<any>(this.urlBuilder.buildUrl('getGlobalInfo'))
 						.pipe(
 							map(response => ({
-								length: MovieService.formatBigLength(Number.parseInt(response.json().data.length)),
-								mark: Number.parseFloat(response.json().data.mark),
-								count: Number.parseInt(response.json().data.cnt),
+								length: MovieService.formatBigLength(Number.parseInt(response.length)),
+								mark: Number.parseFloat(response.mark),
+								count: Number.parseInt(response.cnt),
 							}))
 						);
 	}
 
     public getLatestMovies(): Observable<Movie[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getLatestMovies', this.LATEST_COUNT))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getLatestMovies', this.LATEST_COUNT))
 						.pipe(
-							map(response => (response.json().data as any[])
-										.map(movie => this.jsonToMovie(movie)))
+							map(response => response.map(movie => this.jsonToMovie(movie)))
 						);
 	}
 
 	public getOtherActors(movie: Movie): Observable<Person[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getOtherActors', movie.id))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getOtherActors', movie.id))
 						.pipe(
-							map(response => (response.json().data as any[])
-										.map(people => this.jsonToPerson(people)))
+							map(response => response.map(people => this.jsonToPerson(people)))
 						);
 	}
 
 	public getOscars(movie: Movie): Observable<OscarNomination[]> {
-		return this.http.get(this.urlBuilder.buildUrl('getOscarsOfMovie', movie.id))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('getOscarsOfMovie', movie.id))
 						.pipe(
-							map(response => (response.json().data as any[])
-										.map(oscars => this.jsonToOscars(oscars, movie)))
+							map(response => response.map(oscars => this.jsonToOscars(oscars, movie)))
 						);
 	}
 
 	public getSagaDetails(sagaId: number): Observable<Movie[]> {
-		return this.http.get(this.urlBuilder.buildUrl('stats/getSagaDetails', sagaId))
+		return this.http.get<any[]>(this.urlBuilder.buildUrl('stats/getSagaDetails', sagaId))
 						.pipe(
-							map(response => (response.json().data as any[])
-										.map(movie => this.jsonToMovie(movie)))
+							map(response => response.map(movie => this.jsonToMovie(movie)))
 						);
 	}
 

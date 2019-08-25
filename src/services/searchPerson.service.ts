@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { UrlBuilderService } from './url-builder.service';
@@ -19,7 +19,7 @@ export class SearchPersonService {
 	public results = new Subject<Movie[]>();
 
 	constructor(
-		private http: Http,
+		private http: HttpClient,
 		private urlBuilder: UrlBuilderService,
 		private movieService: MovieService
 	) {}
@@ -72,9 +72,9 @@ export class SearchPersonService {
 	}
 
 	public getPersonById(id: number, type: string): Observable<Person> {
-		return this.http.get(this.urlBuilder.buildUrl('getPerson', id))
+		return this.http.get<any>(this.urlBuilder.buildUrl('getPerson', id))
 							.pipe(
-								map(response => this.movieService.jsonToPerson(response.json().data))
+								map(response => this.movieService.jsonToPerson(response))
 							);
 	}
 

@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UrlBuilderService {
@@ -9,11 +9,11 @@ export class UrlBuilderService {
 	public cacheToken = "";
 
 	constructor(
-		private http: Http
+		private http: HttpClient
 	) {
-		this.http.get(this.buildUrl('getCacheToken'))
+		this.http.get<string>(this.buildUrl('getCacheToken'))
 			.subscribe(x => {
-				this.cacheToken = x.json().data
+				this.cacheToken = x
 			});
 	}
 

@@ -44,11 +44,11 @@
 		filter: grayscale(1) invert(1);
 
 		&.owned {
-			background-image: url(/assets/images/owned.png);
+			background-image: url(../../../assets/images/owned.png);
 		}
 
 		&.cinema {
-			background-image: url(/assets/images/cinema.png);
+			background-image: url(../../../assets/images/cinema.png);
 		}
 
 		&.true {
