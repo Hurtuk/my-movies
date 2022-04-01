@@ -15,9 +15,9 @@ export class StatsActorsComponent {
 	public mostSeenActors = this.statsService.getMostSeenActors(this.MOSTSEEN_COUNT).pipe(
 		map((x: any[]) =>
 		({
-			widthFunction: w => 30 + 5 * (w - 15),
-			heightFunction: h => 40 + 7 * (h - 15),
-			fontSizeFunction: fs => .3 + .05 * (fs - 15),
+			widthFunction: w => 50 + 5 * (w - 20),
+			heightFunction: h => 65 + 7 * (h - 20),
+			fontSizeFunction: fs => .6 + .05 * (fs - 20),
 			people: x
 		}))
 	);

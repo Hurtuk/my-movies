@@ -45,23 +45,4 @@
 			</div>
 		</section>
 	</ng-container>
-	<div>
-		<div *ngFor="let group of actors">
-			<div class="count">{{ group[0].movies.length }} films</div>
-			<div class="people">
-				<div class="person"	*ngFor="let person of group">
-					<app-person-detailed
-						[class.justseen]="person.person.justseen"
-						[width]="90 + 12 * (group[0].movies.length - 4)"
-						[height]="110 + 15 * (group[0].movies.length - 4)"
-						[style.font-size.em]="0.8 + 0.07 * (group[0].movies.length - 4)"
-						[person]="person.person"></app-person-detailed>
-					<ul [style.padding-right.px]="40 + 90 + 12 * (group[0].movies.length - 4)"
-						[style.min-height.px]="50 + 110 + 15 * (group[0].movies.length - 4)">
-						<li *ngFor="let movie of person.movies">{{movie}}</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
