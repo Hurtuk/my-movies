@@ -8,3 +8,25 @@ header {
 	color: white;
 	height: 110px;
 }
+
+.flexbox span {
+	flex: 0;
+	white-space: nowrap;
+}
+
+.flexbox .flexbox {
+	align-items: center;
+}
+
+.collab {
+	display: inline-block;
+	margin: .5rem;
+
+	span {
+		display: block;
+		color: white;
+		background-color: #222;
+		text-align: center;
+		margin-top: -9px;
+	}
+}

@@ -51,4 +51,12 @@ export class StatsService {
 	public getDirectorsAges(): Observable<Person[]> {
 		return this.http.get<Person[]>(this.urlBuilder.buildUrl('stats/getAges', 'dirs'));
 	}
+
+	public getPassedActors(): Observable<Person[]> {
+		return this.http.get<Person[]>(this.urlBuilder.buildUrl('stats/getPassed', 'acts'));
+	}
+
+	public getCollabsActors(): Observable<Person[]> {
+		return this.http.get<Person[]>(this.urlBuilder.buildUrl('stats/getCollabs', 'acts'));
+	}
 }

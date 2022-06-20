@@ -12,6 +12,8 @@ export class StatsActorsComponent {
 	private MOSTSEEN_COUNT = 38;
 	private FIRSTROLES_COUNT = 20;
 
+	public year = (new Date()).getFullYear();
+
 	public mostSeenActors = this.statsService.getMostSeenActors(this.MOSTSEEN_COUNT).pipe(
 		map((x: any[]) =>
 		({
@@ -42,8 +44,53 @@ export class StatsActorsComponent {
 		}))
 	);
 
+	public ages = this.statsService.getActorsAges().pipe(
+		map((x: any) =>
+		({
+			mold: {
+				widthFunction: () => 100,
+				heightFunction: () => 130,
+				fontSizeFunction: () => 0,
+				people: x.mold.map(m => ({person: m}))
+			},
+			fold: {
+				widthFunction: () => 100,
+				heightFunction: () => 130,
+				fontSizeFunction: () => 0,
+				people: x.fold.map(m => ({person: m}))
+			},
+			myoung: {
+				widthFunction: () => 100,
+				heightFunction: () => 130,
+				fontSizeFunction: () => 0,
+				people: x.myoung.map(m => ({person: m}))
+			},
+			fyoung: {
+				widthFunction: () => 100,
+				heightFunction: () => 130,
+				fontSizeFunction: () => 0,
+				people: x.fyoung.map(m => ({person: m}))
+			}
+		})));
+
+	public passed = this.statsService.getPassedActors().pipe(
+		map((x: any[]) =>
+		({
+			widthFunction: () => 75,
+			heightFunction: () => 100,
+			fontSizeFunction: () => 0,
+			people: x.map(m => ({person: m}))
+		}))
+	);
+
+	public collabs = this.statsService.getCollabsActors();
+
 	constructor(
 		private statsService: StatsService
 	) {}
+
+	public getAge(a: any): string | number {
+		return this.year - a.born;
+	}
 
 }
