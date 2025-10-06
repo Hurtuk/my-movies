@@ -8,7 +8,9 @@ import { Person } from '../entities/person';
 import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class StatsService {
 
 	public searchedDirectors = new Subject<Person[]>();

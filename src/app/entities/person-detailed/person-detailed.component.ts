@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Person } from '../../../entities/person';
+import { PersonSimpleComponent } from '../person-simple/person-simple.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-person-detailed',
-  templateUrl: './person-detailed.component.html',
-  styleUrls: [ './person-detailed.component.scss' ]
+    selector: 'app-person-detailed',
+    templateUrl: './person-detailed.component.html',
+    styleUrls: ['./person-detailed.component.scss'],
+	imports: [PersonSimpleComponent, RouterLink]
 })
 export class PersonDetailedComponent implements OnInit {
 

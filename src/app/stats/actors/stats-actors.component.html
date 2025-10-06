@@ -1,81 +1,85 @@
 <header>
-	<h1>Acteurs</h1>
+  <h1>Acteurs</h1>
 </header>
 <div class="row">
-	<h2>Les plus vus</h2>
-	<app-people-list
-		type="acts"
-		[data]="mostSeenActors | async"></app-people-list>
+  <h2>Les plus vus</h2>
+  <app-people-list
+    type="acts"
+  [data]="mostSeenActors | async"></app-people-list>
 </div>
 <div class="row">
-	<h2>Les mieux notés</h2>
-	<app-people-list
-		type="acts"
-		[data]="bestActors | async"></app-people-list>
+  <h2>Les mieux notés</h2>
+  <app-people-list
+    type="acts"
+  [data]="bestActors | async"></app-people-list>
 </div>
 <div class="row">
-	<h2>Les premiers rôles</h2>
-	<app-people-list
-		type="acts"
-		[data]="firstRoles | async"></app-people-list>
+  <h2>Les premiers rôles</h2>
+  <app-people-list
+    type="acts"
+  [data]="firstRoles | async"></app-people-list>
 </div>
 <div class="row flexbox">
-	<div style="flex: 0">
-		<h2>Les âges</h2>
-		<div *ngIf="(ages | async) as a" class="flexbox">
-			<div>
-				<div class="flexbox">
-					<span>{{ getAge(a.fold.people[0].person) }} ans</span>
-					<app-people-list
-						style="flex-wrap: nowrap"
-						type="acts"
-						[data]="a.fold"></app-people-list>
-				</div>
-				<div class="flexbox">
-					<span>{{ getAge(a.fyoung.people[0].person) }} ans</span>
-					<app-people-list
-						style="flex-wrap: nowrap"
-						type="acts"
-						[data]="a.fyoung"></app-people-list>
-				</div>
-			</div>
-			<div>
-				<div class="flexbox">
-					<app-people-list
-						style="flex-wrap: nowrap"
-						type="acts"
-						[data]="a.mold"></app-people-list>
-					<span>{{ getAge(a.mold.people[0].person) }} ans</span>
-				</div>
-				<div class="flexbox">
-					<app-people-list
-						style="flex-wrap: nowrap"
-						type="acts"
-						[data]="a.myoung"></app-people-list>
-					<span>{{ getAge(a.myoung.people[0].person) }} ans</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div style="margin-left: 200px;">
-		<h2>Les disparus en {{ year }}</h2>
-		<app-people-list
-			style="justify-content: flex-start"
-			type="acts"
-			[data]="passed | async"></app-people-list>
-	</div>
+  <div style="flex: 0">
+    <h2>Les âges</h2>
+    @if ((ages | async); as a) {
+      <div class="flexbox">
+        <div>
+          <div class="flexbox">
+            <span>{{ getAge(a.fold.people[0].person) }} ans</span>
+            <app-people-list
+              style="flex-wrap: nowrap"
+              type="acts"
+            [data]="a.fold"></app-people-list>
+          </div>
+          <div class="flexbox">
+            <span>{{ getAge(a.fyoung.people[0].person) }} ans</span>
+            <app-people-list
+              style="flex-wrap: nowrap"
+              type="acts"
+            [data]="a.fyoung"></app-people-list>
+          </div>
+        </div>
+        <div>
+          <div class="flexbox">
+            <app-people-list
+              style="flex-wrap: nowrap"
+              type="acts"
+            [data]="a.mold"></app-people-list>
+            <span>{{ getAge(a.mold.people[0].person) }} ans</span>
+          </div>
+          <div class="flexbox">
+            <app-people-list
+              style="flex-wrap: nowrap"
+              type="acts"
+            [data]="a.myoung"></app-people-list>
+            <span>{{ getAge(a.myoung.people[0].person) }} ans</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  <div style="margin-left: 200px;">
+    <h2>Les disparus en {{ year }}</h2>
+    <app-people-list
+      style="justify-content: flex-start"
+      type="acts"
+    [data]="passed | async"></app-people-list>
+  </div>
 </div>
 <div class="row">
-	<h2>Les collaborations (1 saga = 1)</h2>
-	<a class="collab" *ngFor="let c of (collabs | async)" [class.justseen]="c.justseen" [routerLink]="['/movies', { acts: c.act1 + ',' + c.act2 }]">
-		<app-person-simple
-			[style.width.px]="75"
-			[style.height.px]="100"
-			[personId]="c.act1"></app-person-simple>
-		<app-person-simple
-			[style.width.px]="75"
-			[style.height.px]="100"
-			[personId]="c.act2"></app-person-simple>
-		<span>{{ c.cnt }}</span>
-	</a>
+  <h2>Les collaborations (1 saga = 1)</h2>
+  @for (c of (collabs | async); track c) {
+    <a class="collab" [class.justseen]="c.justseen" [routerLink]="['/movies', { acts: c.act1 + ',' + c.act2 }]">
+      <app-person-simple
+        [style.width.px]="75"
+        [style.height.px]="100"
+      [personId]="c.act1"></app-person-simple>
+      <app-person-simple
+        [style.width.px]="75"
+        [style.height.px]="100"
+      [personId]="c.act2"></app-person-simple>
+      <span>{{ c.cnt }}</span>
+    </a>
+  }
 </div>

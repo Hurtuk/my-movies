@@ -3,16 +3,16 @@ import { SimpleEntity } from '../../entities/simple-entity';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-multi-select',
-  templateUrl: './multi-select.component.html',
-  styleUrls: [ './multi-select.component.scss' ]
+    selector: 'app-multi-select',
+    templateUrl: './multi-select.component.html',
+    styleUrls: ['./multi-select.component.scss']
 })
 export class MultiSelectComponent implements OnInit {
 
 	@Input() urlParam: string;
 	@Input() items: any[];
 	@Input() displayFunction: Function;
-	public selectedItems = [];
+	public selectedItems: any[] = [];
 
 	public optionsOpened: boolean;
 

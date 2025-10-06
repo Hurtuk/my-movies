@@ -19,4 +19,9 @@ export class Person {
 	actorMovies: Movie[];
 	otherMovies: Movie[];
 	oscars: OscarNomination[];
+
+	// Quick&dirty
+	act1?: any;
+	act2?: any;
+	cnt?: any;
 }

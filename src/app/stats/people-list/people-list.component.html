@@ -1,12 +1,14 @@
-<ng-container *ngIf="data">
-	<a [routerLink]="['/movies', getPersonUrl(person.person.id)]" class="person" *ngFor="let person of data.people">
-		<app-person-simple
-			[class.justseen]="person.person.justseen"
-			[style.width.px]="data.widthFunction(person.count)"
-			[style.height.px]="data.heightFunction(person.count)"
-			[personId]="person.person.id"></app-person-simple>
-		<span
-			[style.font-size.em]="data.fontSizeFunction(person.count)"
-		>{{person.count}}</span>
-	</a>
-</ng-container>
+@if (data) {
+  @for (person of data.people; track person) {
+    <a [routerLink]="['/movies', getPersonUrl(person.person.id)]" class="person">
+      <app-person-simple
+        [class.justseen]="person.person.justseen"
+        [style.width.px]="data.widthFunction(person.count)"
+        [style.height.px]="data.heightFunction(person.count)"
+      [personId]="person.person.id"></app-person-simple>
+      <span
+        [style.font-size.em]="data.fontSizeFunction(person.count)"
+      >{{person.count}}</span>
+    </a>
+  }
+}

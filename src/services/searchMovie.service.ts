@@ -12,7 +12,9 @@ import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
 import { SearchPersonService } from './searchPerson.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SearchMovieService {
 
 	public results = new Subject<Movie[]>();

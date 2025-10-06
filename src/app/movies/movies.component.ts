@@ -3,11 +3,15 @@ import { Movie } from '../../entities/movie';
 import { SearchMovieService } from '../../services/searchMovie.service';
 import { MovieService } from '../../services/movie.service';
 import { SearchPersonService } from '../../services/searchPerson.service';
+import { PersonPanelComponent } from '../entities/person-panel/person-panel.component';
+import { PosterSimpleComponent } from '../entities/poster-simple/poster-simple.component';
+import { SearchMovieComponent } from '../search-movie/search-movie.component';
 
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.component.html',
-  styleUrls: [ './movies.component.scss' ]
+    selector: 'app-movies',
+    templateUrl: './movies.component.html',
+    styleUrls: ['./movies.component.scss'],
+	imports: [PersonPanelComponent, PosterSimpleComponent, SearchMovieComponent]
 })
 export class MoviesComponent implements OnInit {
 
@@ -45,19 +49,19 @@ export class MoviesComponent implements OnInit {
 	public getAverageLength(): string {
 		return MovieService.formatLength(this.movies
 			.map(m => m.length)
-			.reduce((prev, cur) => prev += cur, 0) / this.movies.length);
+			.reduce((prev, cur) => prev! += cur ?? 0, 0)! / this.movies.length);
 	}
 
 	public getAverageMark(): string {
 		return (this.movies
 			.map(m => m.mark)
-			.reduce((prev, cur) => prev += cur, 0) / this.movies.length).toFixed(2);
+			.reduce((prev, cur) => prev! += cur ?? 0, 0)! / this.movies.length).toFixed(2);
 	}
 
 	private orderOscars(oscars: any[]): any[] {
-		const oscarsTemp = [];
-		let prevYear: string;
-		let prevMovieId: number;
+		const oscarsTemp: any[] = [];
+		let prevYear: string = "";
+		let prevMovieId: number = -1;
 		oscars.forEach(o => {
 			if (o.year !== prevYear) {
 				oscarsTemp[o.year] = [];

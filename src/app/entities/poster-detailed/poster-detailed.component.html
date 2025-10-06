@@ -1,8 +1,10 @@
 <div class="poster">
-	<app-poster-simple [movie]="movie" [icons]="false"></app-poster-simple>
-	<div class="movie-details">
-		<span>{{movie.titleFr}}</span>
-		<span *ngIf="movie.titleFr !== movie.title">{{movie.title}}</span>
-		<span>{{movie.year}}</span>
-	</div>
+  <app-poster-simple [movie]="movie" [icons]="false"></app-poster-simple>
+  <div class="movie-details">
+    <span>{{movie.titleFr}}</span>
+    @if (movie.titleFr !== movie.title) {
+      <span>{{movie.title}}</span>
+    }
+    <span>{{movie.year}}</span>
+  </div>
 </div>

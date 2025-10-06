@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { StatsService } from '../../../services/stats.service';
+import { PeopleListComponent } from '../people-list/people-list.component';
+import { RouterLink } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { PersonSimpleComponent } from '@app/entities/person-simple/person-simple.component';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-stats-actors',
-  templateUrl: './stats-actors.component.html',
-  styleUrls: [ './stats-actors.component.scss' ]
+    selector: 'app-stats-actors',
+    templateUrl: './stats-actors.component.html',
+    styleUrls: ['./stats-actors.component.scss'],
+	imports: [PeopleListComponent, RouterLink, AsyncPipe, PersonSimpleComponent]
 })
 export class StatsActorsComponent {
+
+	private statsService = inject(StatsService);
 
 	private MOSTSEEN_COUNT = 38;
 	private FIRSTROLES_COUNT = 20;
@@ -83,11 +91,7 @@ export class StatsActorsComponent {
 		}))
 	);
 
-	public collabs = this.statsService.getCollabsActors();
-
-	constructor(
-		private statsService: StatsService
-	) {}
+	public collabs = this.statsService.getCollabsActors() as Observable<any[]>;
 
 	public getAge(a: any): string | number {
 		return this.year - a.born;

@@ -3,9 +3,9 @@ import { VignetteService } from '../../../services/vignette.service';
 import { Movie } from '../../../entities/movie';
 
 @Component({
-  selector: 'app-poster-simple',
-  templateUrl: './poster-simple.component.html',
-  styleUrls: [ './poster-simple.component.scss' ]
+    selector: 'app-poster-simple',
+    templateUrl: './poster-simple.component.html',
+    styleUrls: ['./poster-simple.component.scss']
 })
 export class PosterSimpleComponent implements OnChanges {
 

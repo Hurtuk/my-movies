@@ -1,5 +1,5 @@
-@import '../../../shared/colors';
-@import '../../../styles.scss';
+@use '../../../shared/colors' as *;
+@use '../../../styles.scss' as *;
 
 header {
 	background-image: url(../../../assets/images/cinema.jpg);

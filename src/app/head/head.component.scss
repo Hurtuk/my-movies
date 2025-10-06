@@ -1,4 +1,4 @@
-@import '../../shared/colors';
+@use '../../shared/colors' as colors;
 
 :host {
 	position: relative;
@@ -14,7 +14,7 @@
 }
 
 .home-button {
-	background-color: $orange-color;
+	background-color: colors.$orange-color;
 	height: 100%;
 	width: 50px;
 }

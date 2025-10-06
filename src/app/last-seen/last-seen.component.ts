@@ -1,28 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../entities/movie';
 import { VignetteService } from '../../services/vignette.service';
 import { OscarNomination } from '../../entities/oscarNomination';
+import { PosterSimpleComponent } from '../entities/poster-simple/poster-simple.component';
+import { PersonDetailedComponent } from '../entities/person-detailed/person-detailed.component';
+import { AsyncPipe } from '@angular/common';
+import { PosterDetailedComponent } from '../entities/poster-detailed/poster-detailed.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-last-seen',
-  templateUrl: './last-seen.component.html',
-  styleUrls: [ './last-seen.component.scss' ]
+    selector: 'app-last-seen',
+    templateUrl: './last-seen.component.html',
+    styleUrls: ['./last-seen.component.scss'],
+	imports: [PosterSimpleComponent, PersonDetailedComponent, AsyncPipe, PosterDetailedComponent, RouterLink]
 })
-export class LastSeenComponent implements OnInit {
+export class LastSeenComponent {
+
+	private movieService = inject(MovieService);
+	private vignetteService = inject(VignetteService);
 
 	public latestMovies = this.movieService.getLatestMovies();
 	public selected = 0;
 	public oscarWon = 0;
 	public oscarNominee = 0;
-
-	constructor(
-		private movieService: MovieService,
-		private vignetteService: VignetteService
-	) {}
-
-	ngOnInit() {
-	}
 
 	public lengthToString(length: number): string {
 		return MovieService.formatLength(length);

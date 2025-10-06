@@ -1,5 +1,5 @@
-@import '../../shared/colors';
-@import '../../styles.scss';
+@use '../../shared/colors' as colors;
+@use '../../styles.scss' as *;
 
 :host {
 	@include gray-pattern;
@@ -14,7 +14,7 @@
 
 label {
 	font-size: .9em;
-	color: $text-semilight-color;
+	color: colors.$text-semilight-color;
 	font-family: 'Brandon Grotesque';
 	font-weight: 100;
 

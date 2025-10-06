@@ -1,5 +1,5 @@
-@import '../../shared/colors';
-@import '../../styles.scss';
+@use '../../shared/colors' as colors;
+@use '../../styles.scss' as *;
 
 header {
 	background-image: url(../../assets/images/oscars.jpg);
@@ -65,7 +65,7 @@ select {
 	}
 
 	legend {
-		background-color: $orange-color;
+		background-color: colors.$orange-color;
 		font-weight: 100;
 		color: white;
 		width: calc(100% - 20px);
@@ -107,11 +107,11 @@ select {
 	}
 
 	.winner {
-		background-color: $oscar-color;
+		background-color: colors.$oscar-color;
 	}
 
 	.unknown {
-		color: $text-light-color;
+		color: colors.$text-light-color;
 		font-style: italic;
 		font-weight: 100;
 		background-color: transparent;
@@ -121,7 +121,7 @@ select {
 	.nominee,
 	.unknown {
 		font-size: .9em;
-		border-top: 1px solid lighten($text-light-color, 20%);
+		border-top: 1px solid lighten(colors.$text-light-color, 20%);
 		opacity: .7;
 		padding-left: 30px;
 	}

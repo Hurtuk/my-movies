@@ -1,48 +1,61 @@
 <header>
-	<h1>Sagas</h1>
+  <h1>Sagas</h1>
 </header>
 <div class="content">
-	<ng-container *ngIf="sagas | async as sagas">
-		<section class="saga" *ngFor="let saga of sagas">
-			<div class="saga-main">
-				<div>
-					<div class="count">{{ saga.count }} films</div>
-					<div class="length">
-						<span>{{ lengthToString(saga.length) }}</span>
-						<span>{{ lengthToString(saga.length / saga.count) }}</span>
-					</div>
-					<div class="mark">{{ saga.mark.toFixed(2) }}</div>
-				</div>
-				<app-poster-simple (click)="displayDetails(saga.id)" [icons]="false" [movie]="saga.movies[saga.count - 1]"></app-poster-simple>
-				<div>
-					<h3>{{ saga.title }}</h3>
-					<div class="people">
-						<div class="directors">Réalisés par <a *ngFor="let dir of saga.directors" [routerLink]="['/movies', { dirs: dir.id }]" [class.justseen]="dir.justseen">{{dir.firstname + ' ' + dir.lastname + (dir.moviesCount != saga.count && dir.moviesCount > 1 ? ' (' + dir.moviesCount + ')' : '')}}</a></div>
-						<div class="actors" *ngIf="saga.actors.length">
-							<span>Avec</span>
-							<div *ngFor="let person of saga.actors" [class.hovered]="selectedSaga === saga.id && hoveredMovie && playedIn(person.id)">
-								<app-person-detailed
-									[class.justseen]="person.justseen"
-									[width]="80"
-									[height]="100"
-									[style.font-size.em]="0.8"
-									[person]="person"></app-person-detailed>
-								<circle-progress
-									*ngIf="person.moviesCount != saga.count"
-									[percent]="person.moviesCount * 100 / saga.count"
-									[style.width.px]="20"
-								></circle-progress>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="saga-detail" *ngIf="sagaDetails && selectedSaga === saga.id">
-				<div class="movie" *ngFor="let m of sagaDetails" (mouseenter)="hoveredMovie = m" (mouseleave)="hoveredMovie = null">
-					<app-poster-simple [movie]="m" [smallicons]="true"></app-poster-simple>
-					<span>{{m.year}}</span>
-				</div>
-			</div>
-		</section>
-	</ng-container>
+  @if (sagas | async; as sagas) {
+    @for (saga of sagas; track saga) {
+      <section class="saga">
+        <div class="saga-main">
+          <div>
+            <div class="count">{{ saga.count }} films</div>
+            <div class="length">
+              <span>{{ lengthToString(saga.length) }}</span>
+              <span>{{ lengthToString(saga.length / saga.count) }}</span>
+            </div>
+            <div class="mark">{{ saga.mark.toFixed(2) }}</div>
+          </div>
+          <app-poster-simple (click)="displayDetails(saga.id)" [icons]="false" [movie]="saga.movies[saga.count - 1]"></app-poster-simple>
+          <div>
+            <h3>{{ saga.title }}</h3>
+            <div class="people">
+              <div class="directors">Réalisés par @for (dir of saga.directors; track dir) {
+                <a [routerLink]="['/movies', { dirs: dir.id }]" [class.justseen]="dir.justseen">{{dir.firstname + ' ' + dir.lastname + (dir.moviesCount != saga.count && dir.moviesCount > 1 ? ' (' + dir.moviesCount + ')' : '')}}</a>
+              }</div>
+              @if (saga.actors.length) {
+                <div class="actors">
+                  <span>Avec</span>
+                  @for (person of saga.actors; track person) {
+                    <div [class.hovered]="selectedSaga === saga.id && hoveredMovie && playedIn(person.id)">
+                      <app-person-detailed
+                        [class.justseen]="person.justseen"
+                        [width]="80"
+                        [height]="100"
+                        [style.font-size.em]="0.8"
+                      [person]="person"></app-person-detailed>
+                      @if (person.moviesCount != saga.count) {
+                        <circle-progress
+                          [percent]="person.moviesCount * 100 / saga.count"
+                          [style.width.px]="20"
+                        ></circle-progress>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        @if (sagaDetails && selectedSaga === saga.id) {
+          <div class="saga-detail">
+            @for (m of sagaDetails; track m) {
+              <div class="movie" (mouseenter)="hoveredMovie = m" (mouseleave)="hoveredMovie = null">
+                <app-poster-simple [movie]="m" [smallicons]="true"></app-poster-simple>
+                <span>{{m.year}}</span>
+              </div>
+            }
+          </div>
+        }
+      </section>
+    }
+  }
 </div>

@@ -9,7 +9,7 @@ import { StatsActorsComponent } from './stats/actors/stats-actors.component';
 import { StatsDirectorsComponent } from './stats/directors/stats-directors.component';
 import { StatsSagasComponent } from './stats/sagas/stats-sagas.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
 	path: '',
 	component: LastSeenComponent,
@@ -51,9 +51,3 @@ const routes: Routes = [
 	]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

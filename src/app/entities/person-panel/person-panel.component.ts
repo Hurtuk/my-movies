@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { PersonDescriptionComponent } from '../person-description/person-description.component';
+import { FlagComponent } from '../flag/flag.component';
 
 @Component({
-  selector: 'app-person-panel',
-  templateUrl: './person-panel.component.html',
-  styleUrls: [ './person-panel.component.scss' ]
+    selector: 'app-person-panel',
+    templateUrl: './person-panel.component.html',
+    styleUrls: ['./person-panel.component.scss'],
+	imports: [PersonDescriptionComponent, FlagComponent]
 })
 export class PersonPanelComponent {
 

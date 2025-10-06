@@ -1,90 +1,102 @@
 <div>
-	<label>
-		Titre VF :
-		<input type="text" [(ngModel)]="titleFr" (change)="search()" />
-	</label>
-	<label>
-		Titre VO :
-		<input type="text" [(ngModel)]="title" (change)="search()" />
-	</label>
-	<label>
-		Année entre :
-		<select [(ngModel)]="yearBefore" (change)="search()">
-			<option *ngFor="let y of years">{{y}}</option>
-		</select>
-		et
-		<select [(ngModel)]="yearAfter" (change)="search()">
-			<option *ngFor="let y of years">{{y}}</option>
-		</select>
-	</label>
-	<label>
-		Note entre :
-		<select [(ngModel)]="markBefore" (change)="search()">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>6.5</option>
-			<option>7</option>
-			<option>7.5</option>
-			<option>8</option>
-			<option>8.5</option>
-			<option>9</option>
-			<option>10</option>
-		</select>
-		et
-		<select [(ngModel)]="markAfter" (change)="search()">
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-			<option>6</option>
-			<option>6.5</option>
-			<option>7</option>
-			<option>7.5</option>
-			<option>8</option>
-			<option>8.5</option>
-			<option>9</option>
-			<option>10</option>
-		</select>
-	</label>
-	<input type="checkbox" [(ngModel)]="owned" (change)="search()" id="owned" />
-	<label for="owned"></label>
-	<input type="checkbox" [(ngModel)]="cinema" (change)="search()" id="cinema" />
-	<label for="cinema"></label>
+  <label>
+    Titre VF :
+    <input type="text" [(ngModel)]="titleFr" (change)="search()" />
+  </label>
+  <label>
+    Titre VO :
+    <input type="text" [(ngModel)]="title" (change)="search()" />
+  </label>
+  <label>
+    Année entre :
+    <select [(ngModel)]="yearBefore" (change)="search()">
+      @for (y of years; track y) {
+        <option>{{y}}</option>
+      }
+    </select>
+    et
+    <select [(ngModel)]="yearAfter" (change)="search()">
+      @for (y of years; track y) {
+        <option>{{y}}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Note entre :
+    <select [(ngModel)]="markBefore" (change)="search()">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>6.5</option>
+      <option>7</option>
+      <option>7.5</option>
+      <option>8</option>
+      <option>8.5</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+    et
+    <select [(ngModel)]="markAfter" (change)="search()">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>6.5</option>
+      <option>7</option>
+      <option>7.5</option>
+      <option>8</option>
+      <option>8.5</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+  </label>
+  <input type="checkbox" [(ngModel)]="owned" (change)="search()" id="owned" />
+  <label for="owned"></label>
+  <input type="checkbox" [(ngModel)]="cinema" (change)="search()" id="cinema" />
+  <label for="cinema"></label>
 </div>
 <div>
-	<label *ngIf="categories">
-		Genre :
-		<app-multi-select
-			urlParam="cats"
-			[items]="categories"
-			(change)="categoriesSelected = $event; search()"></app-multi-select>
-	</label>
-	<label *ngIf="countries">
-		Pays :
-		<app-multi-select
-			urlParam="cnts"
-			[items]="countries"
-			(change)="countriesSelected = $event; search()"></app-multi-select>
-	</label>
-	<label *ngIf="directors">
-		Réalisateur :
-		<app-multi-select
-			urlParam="dirs"
-			[items]="directors"
-			[displayFunction]="displayPeopleCallback"
-			(change)="updateDirectors($event)"></app-multi-select>
-	</label>
-	<label *ngIf="actors">
-		Avec :
-		<app-multi-select
-			urlParam="acts"
-			[items]="actors"
-			[displayFunction]="displayPeopleCallback"
-			(change)="updateActors($event)"></app-multi-select>
-	</label>
+  @if (categories) {
+    <label>
+      Genre :
+      <app-multi-select
+        urlParam="cats"
+        [items]="categories"
+      (change)="categoriesSelected = $event; search()"></app-multi-select>
+    </label>
+  }
+  @if (countries) {
+    <label>
+      Pays :
+      <app-multi-select
+        urlParam="cnts"
+        [items]="countries"
+      (change)="countriesSelected = $event; search()"></app-multi-select>
+    </label>
+  }
+  @if (directors) {
+    <label>
+      Réalisateur :
+      <app-multi-select
+        urlParam="dirs"
+        [items]="directors"
+        [displayFunction]="displayPeopleCallback"
+      (change)="updateDirectors($event)"></app-multi-select>
+    </label>
+  }
+  @if (actors) {
+    <label>
+      Avec :
+      <app-multi-select
+        urlParam="acts"
+        [items]="actors"
+        [displayFunction]="displayPeopleCallback"
+      (change)="updateActors($event)"></app-multi-select>
+    </label>
+  }
 </div>

@@ -11,12 +11,12 @@ export class Movie {
 	directors: Person[];
 	actors: Person[];
 	year: number;
-	length: number;
-	mark: number;
-	owned: boolean;
-	cinema: boolean;
+	length: number | null;
+	mark: number | null;
+	owned: boolean | null;
+	cinema: boolean | null;
 	saga: SimpleEntity;
-	seenDate: Date;
+	seenDate: Date | null;
 	otherActors: Observable<Person[]>;
 	oscars: Observable<OscarNomination[]>;
 }

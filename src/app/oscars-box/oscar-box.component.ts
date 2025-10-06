@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { OscarNomination } from '../../entities/oscarNomination';
 
 @Component({
-  selector: 'app-oscar-box',
-  templateUrl: './oscar-box.component.html',
-  styleUrls: [ './oscar-box.component.scss' ]
+    selector: 'app-oscar-box',
+    templateUrl: './oscar-box.component.html',
+    styleUrls: ['./oscar-box.component.scss']
 })
 export class OscarBoxComponent {
 

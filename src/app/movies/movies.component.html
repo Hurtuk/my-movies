@@ -1,25 +1,35 @@
 <app-search-movie></app-search-movie>
-<div class="results-recap" *ngIf="movies.length">
-	<span class="movies">{{ movies.length }} films</span>
-	<span class="length">{{ getAverageLength() }}</span>
-	<span class="mark">{{ getAverageMark() }}/10</span>
-</div>
-<div class="people directors" *ngIf="directors">
-	<span>Réalisateur{{directors.length > 1 ? 's' : ''}}</span>
-	<div>
-		<app-person-panel
-			*ngFor="let person of directors"
-			[person]="person"></app-person-panel>
-	</div>
-</div>
-<div class="people actors" *ngIf="actors">
-	<span>Acteur{{actors.length > 1 ? 's' : ''}}</span>
-	<div>
-		<app-person-panel
-			*ngFor="let person of actors"
-			[person]="person"></app-person-panel>
-	</div>
-</div>
+@if (movies.length) {
+  <div class="results-recap">
+    <span class="movies">{{ movies.length }} films</span>
+    <span class="length">{{ getAverageLength() }}</span>
+    <span class="mark">{{ getAverageMark() }}/10</span>
+  </div>
+}
+@if (directors) {
+  <div class="people directors">
+    <span>Réalisateur{{directors.length > 1 ? 's' : ''}}</span>
+    <div>
+      @for (person of directors; track person) {
+        <app-person-panel
+        [person]="person"></app-person-panel>
+      }
+    </div>
+  </div>
+}
+@if (actors) {
+  <div class="people actors">
+    <span>Acteur{{actors.length > 1 ? 's' : ''}}</span>
+    <div>
+      @for (person of actors; track person) {
+        <app-person-panel
+        [person]="person"></app-person-panel>
+      }
+    </div>
+  </div>
+}
 <div class="results">
-	<app-poster-simple *ngFor="let movie of movies" [movie]="movie"></app-poster-simple>
+  @for (movie of movies; track movie) {
+    <app-poster-simple [movie]="movie"></app-poster-simple>
+  }
 </div>

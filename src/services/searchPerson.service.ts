@@ -11,7 +11,9 @@ import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
 import { forkJoin, of } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SearchPersonService {
 
 	public searchedDirectors = new Subject<Person[]>();

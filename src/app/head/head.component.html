@@ -1,7 +1,9 @@
 <div class="row">
-	<a routerLink="/" class="home-button"></a>
-	<app-sidebar></app-sidebar>
-	<div *ngIf="globalData | async; let data">
-		<span>{{ data.count }} films vus</span> | <span>{{ data.length }}</span> | <span>{{ data.mark.toFixed(2) }}/10</span>
-	</div>
+  <a routerLink="/" class="home-button"></a>
+  <app-sidebar></app-sidebar>
+  @if (globalData | async; as data) {
+    <div>
+      <span>{{ data.count }} films vus</span> | <span>{{ data.length }}</span> | <span>{{ data.mark.toFixed(2) }}/10</span>
+    </div>
+  }
 </div>

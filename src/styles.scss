@@ -1,4 +1,4 @@
-@import './shared/colors';
+@use './shared/colors' as *;
 
 @font-face {
 	font-family: 'Brandon Grotesque';

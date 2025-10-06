@@ -1,4 +1,4 @@
-@import '../../shared/colors';
+@use '../../shared/colors' as colors;
 
 :host {
 	position: relative;
@@ -7,7 +7,7 @@
 
 .selected {
 	background-color: white;
-	box-shadow: -2px 2px 2px lighten($shadow-color, 70%);
+	box-shadow: -2px 2px 2px lighten(colors.$shadow-color, 70%);
 	display: inline-block;
 	border-radius: 23px;
 	line-height: 23px;
@@ -51,7 +51,7 @@ ul {
 		line-height: 2em;
 		font-size: .85em;
 		font-family: 'Open Sans';
-		color: $text-semilight-color;
+		color: colors.$text-semilight-color;
 	}
 }
 

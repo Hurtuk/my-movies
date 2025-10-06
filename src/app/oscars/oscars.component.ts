@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { OscarService } from '../../services/oscar.service';
 import { OscarNomination } from '../../entities/oscarNomination';
 import { Person } from '../../entities/person';
+import { PosterSimpleComponent } from '../entities/poster-simple/poster-simple.component';
+import { PersonSimpleComponent } from '../entities/person-simple/person-simple.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-oscars',
-  templateUrl: './oscars.component.html',
-  styleUrls: [ './oscars.component.scss' ]
+    selector: 'app-oscars',
+    templateUrl: './oscars.component.html',
+    styleUrls: ['./oscars.component.scss'],
+	imports: [PosterSimpleComponent, PersonSimpleComponent, FormsModule]
 })
 export class OscarsComponent implements OnInit {
 

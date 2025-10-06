@@ -1,14 +1,24 @@
-<ng-container *ngIf="oscars">
-	<div class="oscars" *ngIf="oscars.length">
-		<span class="won" *ngFor="let o of getOscarsWon()"></span>
-		<span class="nominee" *ngFor="let o of getOscarsNominations()"></span>
-		<div class="oscar-details">
-			<div class="oscar-detail" *ngFor="let o of oscars" [class.detail-won]="o.won">
-				<span>{{o.name}}</span>
-				<div>
-					<span *ngFor="let n of o.nominees">{{n.firstname + ' ' + n.lastname}}</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</ng-container>
+@if (oscars) {
+  @if (oscars.length) {
+    <div class="oscars">
+      @for (o of getOscarsWon(); track o) {
+        <span class="won"></span>
+      }
+      @for (o of getOscarsNominations(); track o) {
+        <span class="nominee"></span>
+      }
+      <div class="oscar-details">
+        @for (o of oscars; track o) {
+          <div class="oscar-detail" [class.detail-won]="o.won">
+            <span>{{o.name}}</span>
+            <div>
+              @for (n of o.nominees; track n) {
+                <span>{{n.firstname + ' ' + n.lastname}}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+}

@@ -1,5 +1,5 @@
-@import '../../shared/colors.scss';
-@import '../../shared/oscars.scss';
+@use '../../shared/colors.scss' as *;
+@use '../../shared/oscars.scss' as *;
 
 .oscars {
 	background-color: $orange-color;

@@ -5,11 +5,14 @@ import { SearchMovieService } from '../../services/searchMovie.service';
 import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { SearchPersonService } from '../../services/searchPerson.service';
+import { MultiSelectComponent } from '../multi-select/multi-select.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-search-movie',
-  templateUrl: './search-movie.component.html',
-  styleUrls: [ './search-movie.component.scss' ]
+    selector: 'app-search-movie',
+    templateUrl: './search-movie.component.html',
+    styleUrls: ['./search-movie.component.scss'],
+	imports: [MultiSelectComponent, FormsModule]
 })
 export class SearchMovieComponent implements OnInit {
 

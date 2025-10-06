@@ -1,5 +1,5 @@
-@import '../../shared/colors';
-@import '../../styles.scss';
+@use '../../shared/colors' as colors;
+@use '../../styles.scss' as *;
 
 ul {
 	list-style-type: none;
@@ -22,7 +22,7 @@ li {
 a {
 	@include orange-border-bottom;
 	display: block;
-	color: $text-color;
+	color: colors.$text-color;
 	text-decoration: none;
 
 	&:not([routerLink]) {
@@ -30,7 +30,7 @@ a {
 
 		&::after {
 			content: '';
-			border-top: 10px solid $text-semilight-color;
+			border-top: 10px solid colors.$text-semilight-color;
 			border-left: 8px solid transparent;
 			border-right: 8px solid transparent;
 			position: absolute;

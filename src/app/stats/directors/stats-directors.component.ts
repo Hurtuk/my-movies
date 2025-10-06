@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { StatsService } from '../../../services/stats.service';
 import { map } from 'rxjs/operators';
+import { PeopleListComponent } from '../people-list/people-list.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-stats-directors',
-  templateUrl: './stats-directors.component.html',
-  styleUrls: [ './stats-directors.component.scss' ]
+    selector: 'app-stats-directors',
+    templateUrl: './stats-directors.component.html',
+    styleUrls: ['./stats-directors.component.scss'],
+	imports: [PeopleListComponent, AsyncPipe]
 })
 export class StatsDirectorsComponent {
+
+	private statsService = inject(StatsService);
 
 	private MOSTSEEN_COUNT = 38;
 	private BEST_COUNT = 30;
@@ -31,9 +36,5 @@ export class StatsDirectorsComponent {
 			people: x
 		}))
 	);
-
-	constructor(
-		private statsService: StatsService
-	) {}
 
 }

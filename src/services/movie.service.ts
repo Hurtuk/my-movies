@@ -10,7 +10,9 @@ import { Person } from '../entities/person';
 import { OscarNomination } from '../entities/oscarNomination';
 import { Observable } from 'rxjs/internal/Observable';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MovieService {
 
 	private LATEST_COUNT = 7;
@@ -78,7 +80,7 @@ export class MovieService {
 						);
 	}
 
-	public jsonToOscars(json: any, movie: Movie = null): OscarNomination {
+	public jsonToOscars(json: any, movie: Movie | null = null): OscarNomination {
 		const oscarNomination = new OscarNomination;
 			oscarNomination.id = json.id;
 			oscarNomination.year = json.year;

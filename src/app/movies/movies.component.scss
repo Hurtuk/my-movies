@@ -1,5 +1,5 @@
-@import '../../shared/colors';
-@import '../../styles.scss';
+@use '../../shared/colors' as colors;
+@use '../../styles.scss' as *;
 
 app-search-movie {
 	position: relative;
@@ -18,7 +18,7 @@ app-search-movie {
 	}
 
 	> div {
-		background-color: $background-gray-color;
+		background-color: colors.$background-gray-color;
 		padding: 20px 10px 10px;
 	}
 
@@ -44,7 +44,7 @@ app-search-movie {
 
 .results-recap {
 	text-align: center;
-	background-color: $orange-color;
+	background-color: colors.$orange-color;
 	color: white;
 	margin: 0 0 20px 0;
 	padding: 5px;

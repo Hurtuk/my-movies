@@ -1,5 +1,5 @@
-@import '../../shared/colors';
-@import '../../styles.scss';
+@use '../../shared/colors' as colors;
+@use '../../styles.scss' as *;
 
 :host {
 	display: flex;
@@ -9,7 +9,7 @@
 
 	&::after {
 		content: '';
-		background-color: $background-gray-color;
+		background-color: colors.$background-gray-color;
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -55,7 +55,7 @@
 	.data {
 		min-height: 227px;
 		padding-top: 75px;
-		color: $text-semilight-color;
+		color: colors.$text-semilight-color;
 	}
 
 	.metadata {
@@ -71,12 +71,12 @@
 
 	.sub-title {
 		letter-spacing: 1px;
-		color: $text-light-color;
+		color: colors.$text-light-color;
 	}
 
 	.year {
 		font-weight: bold;
-		color: $text-light-color;
+		color: colors.$text-light-color;
 		font-size: .9em;
 		margin-left: 10px;
 	}
@@ -86,7 +86,7 @@
 		margin-top: 20px;
 
 		a {
-			border: 2px solid $orange-color;
+			border: 2px solid colors.$orange-color;
 			text-transform: uppercase;
 			font-size: .6em;
 			font-weight: bold;
@@ -155,8 +155,8 @@
 	}
 
 	.oscars {
-		background-color: $oscar-color;
-		color: $oscar-text-color;
+		background-color: colors.$oscar-color;
+		color: colors.$oscar-text-color;
 		z-index: 0;
 		padding: 3px;
 

@@ -7,7 +7,9 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { MovieService } from './movie.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class OscarService {
 
 	constructor(
