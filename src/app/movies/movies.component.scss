@@ -86,3 +86,7 @@ app-search-movie {
 		margin: 20px;
 	}
 }
+
+app-person-panel + app-person-panel {
+	margin-top: 1rem;
+}

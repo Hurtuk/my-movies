@@ -21,25 +21,25 @@
           @if (currentType === BY_TYPE) {
             <option></option>
           }
-          @for (o of options; track o) {
+          @for (o of options; track $index) {
             <option>{{o}}</option>
           }
         </select>
       }
       @if (items) {
         <div class="row results">
-          @for (r of items; track r) {
+          @for (r of items; track $index) {
             <fieldset>
               <legend>{{r.key}}</legend>
               <div class="winners-posters">
                 @if (!showPerson(r)) {
-                  @for (w of r.winners; track w) {
+                  @for (w of r.winners; track $index) {
                     <app-poster-simple [icons]="false" [movie]="w.movie"></app-poster-simple>
                   }
                 }
                 @if (showPerson(r)) {
-                  @for (w of r.winners; track w) {
-                    @for (p of w.nominees; track p) {
+                  @for (w of r.winners; track $index) {
+                    @for (p of w.nominees; track $index) {
                       <app-person-simple [personId]="p.id"></app-person-simple>
                     }
                   }
@@ -47,7 +47,7 @@
               </div>
               <ul>
                 @if (r.winners.length) {
-                  @for (winner of r.winners; track winner) {
+                  @for (winner of r.winners; track $index) {
                     <li class="winner">
                       <span class="movie-title">{{winner.movie.titleFr}}</span>
                       <span class="movie-nominee">{{displayPeople(winner.nominees)}}</span>
@@ -57,13 +57,13 @@
                 @if (!r.winners.length) {
                   <li class="winner unknown">???</li>
                 }
-                @for (nominee of r.nominees; track nominee) {
+                @for (nominee of r.nominees; track $index) {
                   <li class="nominee">
                     <span class="movie-title">{{nominee.movie.titleFr}}</span>
                     <span class="movie-nominee">{{displayPeople(nominee.nominees)}}</span>
                   </li>
                 }
-                @for (unknown of getUnknowns(r); track unknown) {
+                @for (unknown of getUnknowns(r); track $index) {
                   <li class="unknown">???</li>
                 }
               </ul>

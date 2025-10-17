@@ -6,7 +6,7 @@
         <div class="metadata">
           <span class="actors-label selected">Avec</span>
           <div class="actors">
-            @for (act of movies[selected].actors; track act) {
+            @for (act of movies[selected].actors; track $index) {
               <app-person-detailed class="first-role" [person]="act"></app-person-detailed>
             }
           </div>
@@ -19,11 +19,11 @@
           <span class="title">{{movies[selected].titleFr}}</span>
           <span class="sub-title">{{movies[selected].titleFr !== movies[selected].title ? movies[selected].title : '&nbsp;'}}</span>
           <span class="directors">De
-            @for (dir of movies[selected].directors; track dir) {
+            @for (dir of movies[selected].directors; track $index) {
               <a [routerLink]="['/movies', { dirs: dir.id }]">{{dir.firstname + ' ' + dir.lastname}}</a>
             }
           </span>
-          <span class="categories">@for (category of movies[selected].categories; track category) {
+          <span class="categories">@for (category of movies[selected].categories; track $index) {
             <a [routerLink]="['movies', {cats: category.id}]">{{category.name}}</a>
           }</span>
         </div>
@@ -47,7 +47,7 @@
           <span class="other-actors-label">Avec aussi</span>
         </div>
         <div class="row other-actors">
-          @for (act of others; track act) {
+          @for (act of others; track $index) {
             <app-person-detailed [width]="120" [height]="150" [person]="act"></app-person-detailed>
           }
         </div>
@@ -55,7 +55,7 @@
     }
   </div>
   <div class="latest-movies row">
-    @for (movie of movies; track movie; let i = $index) {
+    @for (movie of movies; track $index; let i = $index) {
       <div class="movie">
         <app-poster-detailed
           [movie]="movie"

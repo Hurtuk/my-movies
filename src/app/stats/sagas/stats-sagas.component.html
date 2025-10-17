@@ -3,7 +3,7 @@
 </header>
 <div class="content">
   @if (sagas | async; as sagas) {
-    @for (saga of sagas; track saga) {
+    @for (saga of sagas; track $index) {
       <section class="saga">
         <div class="saga-main">
           <div>
@@ -18,13 +18,13 @@
           <div>
             <h3>{{ saga.title }}</h3>
             <div class="people">
-              <div class="directors">Réalisés par @for (dir of saga.directors; track dir) {
+              <div class="directors">Réalisés par @for (dir of saga.directors; track $index) {
                 <a [routerLink]="['/movies', { dirs: dir.id }]" [class.justseen]="dir.justseen">{{dir.firstname + ' ' + dir.lastname + (dir.moviesCount != saga.count && dir.moviesCount > 1 ? ' (' + dir.moviesCount + ')' : '')}}</a>
               }</div>
               @if (saga.actors.length) {
                 <div class="actors">
                   <span>Avec</span>
-                  @for (person of saga.actors; track person) {
+                  @for (person of saga.actors; track $index) {
                     <div [class.hovered]="selectedSaga === saga.id && hoveredMovie && playedIn(person.id)">
                       <app-person-detailed
                         [class.justseen]="person.justseen"
@@ -47,7 +47,7 @@
         </div>
         @if (sagaDetails && selectedSaga === saga.id) {
           <div class="saga-detail">
-            @for (m of sagaDetails; track m) {
+            @for (m of sagaDetails; track $index) {
               <div class="movie" (mouseenter)="hoveredMovie = m" (mouseleave)="hoveredMovie = null">
                 <app-poster-simple [movie]="m" [smallicons]="true"></app-poster-simple>
                 <span>{{m.year}}</span>

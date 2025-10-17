@@ -10,13 +10,13 @@
   <label>
     Année entre :
     <select [(ngModel)]="yearBefore" (change)="search()">
-      @for (y of years; track y) {
+      @for (y of years; track $index) {
         <option>{{y}}</option>
       }
     </select>
     et
     <select [(ngModel)]="yearAfter" (change)="search()">
-      @for (y of years; track y) {
+      @for (y of years; track $index) {
         <option>{{y}}</option>
       }
     </select>

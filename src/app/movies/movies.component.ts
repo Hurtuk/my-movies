@@ -29,19 +29,9 @@ export class MoviesComponent implements OnInit {
 			this.movies = m;
 		});
 		this.searchPersonService.searchedDirectors.subscribe(people => {
-			people.forEach(p => {
-				if (p.oscars) {
-					p.oscars = this.orderOscars(p.oscars);
-				}
-			});
 			this.directors = people;
 		});
 		this.searchPersonService.searchedActors.subscribe(people => {
-			people.forEach(p => {
-				if (p.oscars) {
-					p.oscars = this.orderOscars(p.oscars);
-				}
-			});
 			this.actors = people;
 		});
 	}
@@ -56,25 +46,6 @@ export class MoviesComponent implements OnInit {
 		return (this.movies
 			.map(m => m.mark)
 			.reduce((prev, cur) => prev! += cur ?? 0, 0)! / this.movies.length).toFixed(2);
-	}
-
-	private orderOscars(oscars: any[]): any[] {
-		const oscarsTemp: any[] = [];
-		let prevYear: string = "";
-		let prevMovieId: number = -1;
-		oscars.forEach(o => {
-			if (o.year !== prevYear) {
-				oscarsTemp[o.year] = [];
-			}
-			if (o.year !== prevYear || o.movie.id !== prevMovieId) {
-				oscarsTemp[o.year].push({
-					movie: o.movie.titleFr,
-					oscars: []
-				});
-			}
-			oscarsTemp[o.year][oscarsTemp[o.year].length - 1].oscars.push(o);
-		});
-		return oscarsTemp;
 	}
 
 }

@@ -6,3 +6,6 @@
   </div>
 }
 <div class="poster" [style.backgroundImage]="'url(' + posterUrl + ')'"></div>
+@if (movie.roles?.includes("(voice)")) {
+  <img src="../../../assets/images/laudio.png" class="audio" />
+}

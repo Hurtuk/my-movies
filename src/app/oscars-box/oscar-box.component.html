@@ -1,18 +1,18 @@
 @if (oscars) {
   @if (oscars.length) {
     <div class="oscars">
-      @for (o of getOscarsWon(); track o) {
+      @for (o of getOscarsWon(); track $index) {
         <span class="won"></span>
       }
-      @for (o of getOscarsNominations(); track o) {
+      @for (o of getOscarsNominations(); track $index) {
         <span class="nominee"></span>
       }
       <div class="oscar-details">
-        @for (o of oscars; track o) {
+        @for (o of oscars; track $index) {
           <div class="oscar-detail" [class.detail-won]="o.won">
             <span>{{o.name}}</span>
             <div>
-              @for (n of o.nominees; track n) {
+              @for (n of o.nominees; track $index) {
                 <span>{{n.firstname + ' ' + n.lastname}}</span>
               }
             </div>

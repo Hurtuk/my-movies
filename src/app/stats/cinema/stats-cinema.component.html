@@ -4,11 +4,11 @@
 <div class="content">
   @if (moviesByYear | async; as movies) {
     <div>
-      @for (year of movies; track year) {
+      @for (year of movies; track $index) {
         <div>
           <div class="year">{{ year.year }}</div>
           <div class="movies">
-            @for (movie of year.movies; track movie) {
+            @for (movie of year.movies; track $index) {
               <app-poster-simple [movie]="movie" [icons]="false"></app-poster-simple>
             }
           </div>
@@ -17,11 +17,11 @@
     </div>
   }
   <div>
-    @for (group of actors; track group) {
+    @for (group of actors; track $index) {
       <div>
         <div class="count">{{ group[0].movies.length }} films</div>
         <div class="people">
-          @for (person of group; track person) {
+          @for (person of group; track $index) {
             <div class="person">
               <app-person-detailed
                 [class.justseen]="person.person.justseen"
@@ -31,7 +31,7 @@
               [person]="person.person"></app-person-detailed>
               <ul [style.padding-right.px]="40 + 90 + 12 * (group[0].movies.length - 4)"
                 [style.min-height.px]="50 + 110 + 15 * (group[0].movies.length - 4)">
-                @for (movie of person.movies; track movie) {
+                @for (movie of person.movies; track $index) {
                   <li>{{movie}}</li>
                 }
               </ul>

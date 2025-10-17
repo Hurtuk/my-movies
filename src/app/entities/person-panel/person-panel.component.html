@@ -6,3 +6,16 @@
 <div class="countries">
 	<app-flag [country]="person.country"></app-flag>
 </div>
+<div class="oscars">
+	@for (oscar of person.oscars; track $index) {
+		<div>
+			@if ($index == 0 || oscar.year != person.oscars[$index - 1].year) {
+				<div class="year">{{ oscar.year }}</div>
+			}
+			@if ($index == 0 || oscar.movie.titleFr != person.oscars[$index - 1].movie.titleFr) {
+				<div class="movie">{{ oscar.movie.titleFr }}</div>
+			}
+			<div class="oscar" [class.won]="oscar.won">{{ formatOscar(oscar.name) }}</div>
+		</div>
+	}
+</div>

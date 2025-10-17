@@ -59,6 +59,10 @@ export class StatsService {
 	}
 
 	public getCollabsActors(): Observable<Person[]> {
-		return this.http.get<Person[]>(this.urlBuilder.buildUrl('stats/getCollabs', 'acts'));
+		return this.http.get<Person[]>(this.urlBuilder.buildUrl('stats/getCollabs'));
+	}
+
+	public getCollabsDirectorActor(): Observable<Person[]> {
+		return this.http.get<Person[]>(this.urlBuilder.buildUrl('stats/getCollabsDirs'));
 	}
 }

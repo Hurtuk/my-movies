@@ -1,5 +1,5 @@
 @if (data) {
-  @for (person of data.people; track person) {
+  @for (person of data.people; track $index) {
     <a [routerLink]="['/movies', getPersonUrl(person.person.id)]" class="person">
       <app-person-simple
         [class.justseen]="person.person.justseen"

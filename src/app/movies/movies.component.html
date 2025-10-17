@@ -10,7 +10,7 @@
   <div class="people directors">
     <span>Réalisateur{{directors.length > 1 ? 's' : ''}}</span>
     <div>
-      @for (person of directors; track person) {
+      @for (person of directors; track $index) {
         <app-person-panel
         [person]="person"></app-person-panel>
       }
@@ -21,7 +21,7 @@
   <div class="people actors">
     <span>Acteur{{actors.length > 1 ? 's' : ''}}</span>
     <div>
-      @for (person of actors; track person) {
+      @for (person of actors; track $index) {
         <app-person-panel
         [person]="person"></app-person-panel>
       }
@@ -29,7 +29,7 @@
   </div>
 }
 <div class="results">
-  @for (movie of movies; track movie) {
+  @for (movie of movies; track $index) {
     <app-poster-simple [movie]="movie"></app-poster-simple>
   }
 </div>

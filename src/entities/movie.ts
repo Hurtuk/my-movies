@@ -19,4 +19,5 @@ export class Movie {
 	seenDate: Date | null;
 	otherActors: Observable<Person[]>;
 	oscars: Observable<OscarNomination[]>;
+	roles?: string;
 }

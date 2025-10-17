@@ -11,3 +11,45 @@
 .countries {
 	margin-top: 5px;
 }
+
+.oscars {
+	text-align: center;
+	font-size: .8em;
+	line-height: 1.2rem;
+	margin-top: .5rem;
+
+	.year {
+		letter-spacing: 2px;
+		color: gray;
+
+		&::before {
+			content: "";
+			display: block;
+			margin: .5rem auto;
+			border-top: 1px solid gray;
+			width: 50%;
+		}
+	}
+
+	.movie {
+		font-weight: 400;
+	}
+
+	.oscar {
+		font-weight: 100;
+
+		&.won {
+			font-weight: bold;
+			color: darkgoldenrod;
+
+			&::before {
+				content: "";
+				display: inline-block;
+				background: url(../../../assets/images/oscar.png) center center no-repeat;
+				background-size: contain;
+				height: 1.1rem;
+				width: 16px;
+			}
+		}
+	}
+}

@@ -1,4 +1,4 @@
-@for (item of selectedItems; track item) {
+@for (item of selectedItems; track $index) {
   <div class="selected">
     <span>{{ displayFunction(item) }}</span>
     <i class="remove" (click)="remove(item)">-</i>
@@ -6,7 +6,7 @@
 }
 <i class="add" (click)="optionsOpened = !optionsOpened">+</i>
 <ul [class.columns]="items.length < 30" [class.open]="optionsOpened">
-  @for (item of items; track item) {
+  @for (item of items; track $index) {
     @if (selectedItems.indexOf(item) === -1) {
       <li
       (click)="add(item)">{{ displayFunction(item) }}</li>

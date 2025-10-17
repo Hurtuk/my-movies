@@ -157,6 +157,7 @@ export class MovieService {
 			});
 			movie.otherActors = this.getOtherActors(movie);
 			movie.oscars = this.getOscars(movie);
+			movie.roles = json.roles;
 		return movie;
 	}
 

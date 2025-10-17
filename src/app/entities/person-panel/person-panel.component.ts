@@ -22,4 +22,11 @@ export class PersonPanelComponent {
 		return '(' + ((new Date()).getFullYear() - this.person.born) + ' ans)';
 	}
 
+	public formatOscar(oscar: string) {
+		return oscar
+			.replace("Oscar du ", "")
+			.replace("Oscar de la ", "")
+			.replace("Oscar des ", "");
+	}
+
 }

@@ -3,12 +3,15 @@ import { StatsService } from '../../../services/stats.service';
 import { map } from 'rxjs/operators';
 import { PeopleListComponent } from '../people-list/people-list.component';
 import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { PersonSimpleComponent } from '@app/entities/person-simple/person-simple.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-stats-directors',
     templateUrl: './stats-directors.component.html',
     styleUrls: ['./stats-directors.component.scss'],
-	imports: [PeopleListComponent, AsyncPipe]
+	imports: [PeopleListComponent, AsyncPipe, PersonSimpleComponent, RouterLink]
 })
 export class StatsDirectorsComponent {
 
@@ -36,5 +39,7 @@ export class StatsDirectorsComponent {
 			people: x
 		}))
 	);
+	
+	public collabs = this.statsService.getCollabsDirectorActor() as Observable<any[]>;
 
 }

@@ -13,3 +13,19 @@
 		type="dirs"
 		[data]="bestDirectors | async"></app-people-list>
 </div>
+<div class="row">
+  <h2>Les collaborations (1 saga = 1)</h2>
+  @for (c of (collabs | async); track $index) {
+    <a class="collab" [class.justseen]="c.justseen" [routerLink]="['/movies', { dirs: c.act1, acts: c.act2 }]">
+      <app-person-simple
+        [style.width.px]="75"
+        [style.height.px]="100"
+        [personId]="c.act1"></app-person-simple>
+      <app-person-simple
+        [style.width.px]="75"
+        [style.height.px]="100"
+        [personId]="c.act2"></app-person-simple>
+      <span>{{ c.cnt }}</span>
+    </a>
+  }
+</div>
