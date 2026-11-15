@@ -5,7 +5,7 @@
 	
 	$sagaId = $_GET['arg0'];
 	
-	$movies = $db->select("SELECT m.id, m.titleFr, m.year, m.cinema, m.owned, GROUP_CONCAT(mp.personId SEPARATOR ';') AS mainactors
+	$movies = $db->select("SELECT m.id, m.titleFr, m.year, m.cinema, m.owned, GROUP_CONCAT(mp.personId ORDER BY mp.id SEPARATOR ';') AS mainactors
 								FROM movies m
 								INNER JOIN movies_people mp
 								ON mp.movieId = m.id

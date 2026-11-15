@@ -18,8 +18,44 @@
 							HAVING COUNT(m.id) >= 3
 							ORDER BY cnt DESC, s.title ASC');
 							
+	// Réalisateurs et acteurs récurrents de toutes les sagas en deux requêtes,
+	// au lieu de deux requêtes par saga. Mêmes critères qu'avant :
+	// - réalisateurs : tous ;
+	// - acteurs : présents dans plus de 65 % des films de la saga, ou dans plus
+	//   de 6 films si la saga en compte au moins 10.
+	$sagaIds = implode(',', array_map(function($s) { return (int) $s['id']; }, $sagas));
+	$peopleBySaga = array();
+	if ($sagaIds) {
+		$rows = $db->select('SELECT m.sagaId, p.id, p.lastname, p.firstname, 1 AS director, COUNT(DISTINCT mp.movieId) AS cnt
+								FROM movies m
+								INNER JOIN movies_people mp
+								ON mp.movieId = m.id
+								INNER JOIN people p
+								ON p.id = mp.personId
+								WHERE m.sagaId IN ('.$sagaIds.')
+								AND mp.director = 1
+								GROUP BY m.sagaId, mp.personId
+								ORDER BY m.sagaId, cnt DESC, p.lastname ASC, p.firstname ASC');
+		$rows = array_merge($rows, $db->select('SELECT m.sagaId, p.id, p.lastname, p.firstname, 0 AS director, COUNT(DISTINCT mp.movieId) AS cnt
+								FROM movies m
+								INNER JOIN (SELECT sagaId, COUNT(*) AS total FROM movies WHERE sagaId IN ('.$sagaIds.') GROUP BY sagaId) st
+								ON st.sagaId = m.sagaId
+								INNER JOIN movies_people mp
+								ON mp.movieId = m.id
+								INNER JOIN people p
+								ON p.id = mp.personId
+								WHERE mp.staff >= 0
+								GROUP BY m.sagaId, mp.personId
+								HAVING (MAX(st.total) >= 10 AND COUNT(mp.movieId) > 6)
+									OR (COUNT(mp.movieId) / MAX(st.total)) > 0.65
+								ORDER BY m.sagaId, cnt DESC, p.lastname ASC, p.firstname ASC'));
+		foreach ($rows as $row) {
+			$peopleBySaga[$row['sagaId']][] = $row;
+		}
+	}
+
 	$result = array();
-	
+
 	foreach ($sagas as $s) {
 		$r = array(
 			"id" => $s['id'],
@@ -38,25 +74,9 @@
 				$r['justseen'] = true;
 			}
 		}
-		// Get directors and actors
-		$people = $db->select('(SELECT p.id, p.lastname, p.firstname, 1 AS director, COUNT(DISTINCT mp.movieId) AS cnt, GROUP_CONCAT(mp.movieId)
-								FROM people p
-								INNER JOIN movies_people mp
-								ON p.id = mp.personId
-								WHERE mp.movieId IN ('.$s['ids'].')
-								AND director = 1
-								GROUP BY mp.personId)
-								UNION
-								(SELECT p.id, p.lastname, p.firstname, 0 AS director, COUNT(DISTINCT mp.movieId) AS cnt, GROUP_CONCAT(mp.movieId)
-								FROM people p
-								INNER JOIN movies_people mp
-								ON p.id = mp.personId
-								WHERE mp.movieId IN ('.$s['ids'].')
-								AND staff >= 0
-								GROUP BY mp.personId
-								HAVING '.($s['cnt'] >= 10 ? 'COUNT(mp.movieId) > 6 OR' : '').' (COUNT(mp.movieId) / '.$s['cnt'].'.0) > 0.65)
-								ORDER BY director DESC, cnt DESC, lastname ASC, firstname ASC');
-								
+		// Directors and actors (fetched above, directors first)
+		$people = isset($peopleBySaga[$s['id']]) ? $peopleBySaga[$s['id']] : array();
+
 		$r['directors'] = array();
 		$r['actors'] = array();
 		foreach ($people as $p) {

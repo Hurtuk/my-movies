@@ -8,7 +8,7 @@
 
 	$movies = $db->select("SELECT p.id, p.firstname, p.lastname,
 								COUNT(DISTINCT mp.movieId) AS cnt,
-								GROUP_CONCAT(m.titleFr ORDER BY m.year DESC SEPARATOR '') AS movies
+								GROUP_CONCAT(m.titleFr ORDER BY m.year DESC, mp.id SEPARATOR '') AS movies
 							FROM movies_people mp
 							INNER JOIN people p
 							ON p.id = mp.personId

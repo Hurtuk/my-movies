@@ -8,7 +8,7 @@
 						INNER JOIN people p
 						ON p.id = mp.personId
 						WHERE mp.director = 1
-						ORDER BY p.lastname, p.firstname");
+						ORDER BY p.lastname, p.firstname, p.id");
 
     echoResult($data);
 ?>

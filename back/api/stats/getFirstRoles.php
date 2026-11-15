@@ -7,7 +7,7 @@
 	
 	$lastmovie = getLastMovie();
 	
-	$people = $db->select('SELECT personId AS id, lastname, firstname, SUM(staff) AS cnt, GROUP_CONCAT(movieId SEPARATOR ";") AS movies
+	$people = $db->select('SELECT personId AS id, lastname, firstname, SUM(staff) AS cnt, GROUP_CONCAT(movieId ORDER BY movieId DESC SEPARATOR ";") AS movies
 							FROM movies_people
 							INNER JOIN people p
 							ON p.id = personId

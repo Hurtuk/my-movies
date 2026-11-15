@@ -9,7 +9,7 @@
 	
 	$res = array();
 	
-	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id) AS ids, born
+	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id ORDER BY p.id) AS ids, born
 							FROM people p
 							INNER JOIN movies_people mp
 							ON mp.personId = p.id
@@ -21,7 +21,7 @@
 							LIMIT 1');
 	$res['fold'] = array_map(function($item) use ($r, $lastmovie) { return ['id' => $item, 'born' => $r['born'], "justseen" => in_array($item, $lastmovie['actors'])];}, explode(',', $r['ids']));
 	
-	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id) AS ids, born
+	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id ORDER BY p.id) AS ids, born
 							FROM people p
 							INNER JOIN movies_people mp
 							ON mp.personId = p.id
@@ -33,7 +33,7 @@
 							LIMIT 1');
 	$res['fyoung'] = array_map(function($item) use ($r, $lastmovie) { return ['id' => $item, 'born' => $r['born'], "justseen" => in_array($item, $lastmovie['actors'])]; }, explode(',', $r['ids']));
 	
-	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id) AS ids, born
+	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id ORDER BY p.id) AS ids, born
 							FROM people p
 							INNER JOIN movies_people mp
 							ON mp.personId = p.id
@@ -45,7 +45,7 @@
 							LIMIT 1');
 	$res['mold'] = array_map(function($item) use ($r, $lastmovie) { return ['id' => $item, 'born' => $r['born'], "justseen" => in_array($item, $lastmovie['actors'])]; }, explode(',', $r['ids']));
 	
-	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id) AS ids, born
+	$r = $db->selectVal('SELECT GROUP_CONCAT(DISTINCT p.id ORDER BY p.id) AS ids, born
 							FROM people p
 							INNER JOIN movies_people mp
 							ON mp.personId = p.id
