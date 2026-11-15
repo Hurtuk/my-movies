@@ -45,3 +45,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Identifiants de livraison FTPS (voir la skill deploy-lws)
+.secrets/
+
+# Back : identifiants MySQL et photos (serveur uniquement)
+/back/php/config.php
+/back/images/people/
+/back/images/posters/

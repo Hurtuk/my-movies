@@ -1,0 +1,40 @@
+<?php
+	include '../../php/datamodel.php';
+
+    global $db;
+	
+	$limit = $_GET['arg0'];
+	
+	$lastmovie = getLastMovie();
+	
+	$people = $db->select('SELECT mp.personId AS id, p.lastname, p.firstname, COUNT(movieId) AS cnt, GROUP_CONCAT(movieId SEPARATOR ";") AS movies
+							FROM movies_people mp
+							INNER JOIN people p
+							ON p.id = mp.personId
+							WHERE mp.staff >= 0
+							GROUP BY personId
+							HAVING SUM(mp.staff) > 0
+							ORDER BY cnt DESC, lastname ASC, firstname ASC
+							LIMIT '.($limit + 1));
+							
+	$result = array();
+	
+	$lastValue = $people[count($people) - 1]['cnt'];
+	for ($i = 0; $i < count($people) - 1; $i++) {
+		if ($people[$i]['cnt'] === $lastValue) {
+			break;
+		}
+		$result[] = array(
+			"person" => array(
+				"id" => $people[$i]['id'],
+				"firstname" => $people[$i]['firstname'],
+				"lastname" => $people[$i]['lastname'],
+				"justseen" => in_array($people[$i]['id'], $lastmovie['actors'])
+			),
+			"count" => $people[$i]['cnt'],
+			"movies" => explode(";", $people[$i]['movies'])
+		);
+	}
+
+    echoResult($result);
+?>
