@@ -14,6 +14,7 @@
     Jamais envoyés :
       - php/config.sample.php : gabarit ;
       - sql/ : scripts de migration, ils n'ont rien à faire sous la racine web ;
+      - cache/*.json : résultats calculés par le serveur (seul cache/.htaccess part) ;
       - images/people/ et images/posters/ : ~270 Mo de photos qui ne vivent que
         sur le serveur (ni dans le dépôt, ni dans la livraison).
 
@@ -101,10 +102,15 @@ if ($TestConnection) {
 if ($livrerFront -and -not $SkipBuild) {
 	Write-Etape "Build du front (base href $dossierFront/)"
 	Push-Location $racine
+	# ng écrit ses avertissements sur stderr : avec 'Stop', PowerShell 5.1 en
+	# ferait une erreur fatale dès que la sortie est redirigée. Seul le code de
+	# retour fait foi.
+	$preferenceAvant = $ErrorActionPreference
+	$ErrorActionPreference = 'Continue'
 	try {
-		& npx ng build --configuration production --base-href "$dossierFront/"
+		& npx ng build --configuration production --base-href "$dossierFront/" 2>&1 | ForEach-Object { "$_" }
 		if ($LASTEXITCODE -ne 0) { throw "ng build a échoué (code $LASTEXITCODE) — rien n'a été envoyé." }
-	} finally { Pop-Location }
+	} finally { $ErrorActionPreference = $preferenceAvant; Pop-Location }
 }
 
 # --------------------------------------------------------------------------
@@ -124,6 +130,9 @@ if ($livrerBack) {
 		if ($relatif -eq '.gitignore') { continue }
 		if ($relatif -eq 'php/config.sample.php') { continue }
 		if ($relatif -like 'sql/*') { continue }
+		# cache/ : seul son .htaccess (refus d'accès) est livré, les résultats sont
+		# calculés sur le serveur.
+		if ($relatif -like 'cache/*' -and $relatif -ne 'cache/.htaccess') { continue }
 		if ($relatif -like 'images/people/*' -or $relatif -like 'images/posters/*') { continue }
 		if ($relatif -eq 'php/config.php' -and -not $IncludeConfig) { continue }
 		if ($relatif -like 'images/*' -and -not $IncludeImages) { continue }

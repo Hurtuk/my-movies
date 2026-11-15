@@ -1,0 +1,4 @@
+# Résultats de calcul mis en cache par php/cache.php : jamais servis en direct.
+<Files "*">
+	Require all denied
+</Files>

@@ -53,3 +53,5 @@ Thumbs.db
 /back/php/config.php
 /back/images/people/
 /back/images/posters/
+/back/cache/*.json
+/back/cache/*.tmp

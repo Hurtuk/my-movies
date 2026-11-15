@@ -29,4 +29,13 @@ header {
 		text-align: center;
 		margin-top: -9px;
 	}
+
+	// Le « +1 » global de .justseen se place sous l'élément : ici il tomberait
+	// sur la tuile de la ligne suivante. On le pose dans la barre du score.
+	&.justseen::after {
+		top: auto;
+		bottom: 0;
+		left: auto;
+		right: 0;
+	}
 }
