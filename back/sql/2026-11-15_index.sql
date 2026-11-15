@@ -1,5 +1,6 @@
 -- Index et moteur InnoDB pour les jointures sur movies_people.
--- PAS ENCORE JOUÉE EN PROD. À passer dans phpMyAdmin LWS (le port 3306 est filtré).
+-- Jouée en prod le 2026-11-15 (MariaDB 10.11.19, 1 s) via un endpoint jetable protégé
+-- par jeton, supprimé aussitôt après (le port 3306 est filtré par LWS).
 --
 -- Testé le 2026-11-15 sur le dump du 2026-09-03 (MariaDB 10.10 locale) :
 --   getLatestMovies                 2,50 s -> 0,10 s (0,016 s avec la requête réécrite)
